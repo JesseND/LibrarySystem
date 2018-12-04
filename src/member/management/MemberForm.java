@@ -3,6 +3,7 @@ package member.management;
 import javax.swing.text.TabExpander;
 import javax.swing.text.TabableView;
 
+import common.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,17 +18,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import common.*;
 
-public class MemberForm extends Stage {
-	Stage primaryStage;
-	@SuppressWarnings("serial")
+public class MemberForm extends Application {
 
-	GridPane grid = new GridPane();
-	
-	public MemberForm(Stage ps) {
-		primaryStage = ps;
-		setTitle("Member Management");
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		primaryStage.setTitle("Member Form");
 	
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class MemberForm extends Stage {
 		TextField lastNameTextField = new TextField();
 		grid.add(lastNameTextField, 1, 2);
 		
-		Label phoneNumberLabel = new Label("Phone Number");
+		Label phoneNumberLabel = new Label("Phone");
 		grid.add(phoneNumberLabel, 0, 3);
 		TextField phoneNumberTextField = new TextField();
 		grid.add(phoneNumberTextField, 1, 3);

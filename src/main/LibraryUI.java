@@ -15,23 +15,13 @@ import javafx.stage.Stage;
 
 
 public class LibraryUI extends Application {
-//	private MemberWindow memberWindow;
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	Stage memberForm;
-	Stage primaryStage;
-	
-	private void createMemberForm() {
-		memberForm = new MemberForm(primaryStage);
-	}
-	
+
 	@Override
 	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Library System");
-		createMemberForm();
 				
 		VBox topContainer = new VBox();
 		MenuBar mainMenu = new MenuBar();
@@ -45,7 +35,7 @@ public class LibraryUI extends Application {
 		Menu memberMenu = new Menu("Member");
 		MenuItem addNew = new MenuItem("Add New");
 		addNew.setOnAction(evt -> {
-			memberForm.show();
+
 		});
 		
 		MenuItem searchMember = new MenuItem("Search for Member");
