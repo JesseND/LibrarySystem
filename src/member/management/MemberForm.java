@@ -5,6 +5,8 @@ import javax.swing.text.TabableView;
 
 import common.*;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,12 +17,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class MemberForm extends Application {
 
+	private TableView table = new TableView();
+	
+    private final ObservableList<LibMember> data =
+	        FXCollections.observableArrayList(
+	            new LibMember("001", "John", "Smith", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"))
+	        );
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -77,16 +87,30 @@ public class MemberForm extends Application {
 		grid.add(zipTextField, 1, 7);
 		
 		Button createBtn = new Button("Create");
+		Button updateBtn = new Button("Update");
 		HBox hbBtn = new HBox(10);
 		hbBtn.setAlignment(Pos.BASELINE_CENTER);
 		hbBtn.getChildren().add(createBtn);
+		hbBtn.getChildren().add(updateBtn);
 		grid.add(hbBtn, 1, 8);
 		
-		TableView table = new TableView();
+		TableColumn idCol = new TableColumn("Member ID");
+		idCol.setCellValueFactory(
+                new PropertyValueFactory<LibMember, String>("id"));
+		
 		TableColumn firstNameCol = new TableColumn("First Name");
+		firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<LibMember, String>("firstName"));
+		
         TableColumn lastNameCol = new TableColumn("Last Name");
-        table.getColumns().addAll(firstNameCol, lastNameCol);
-        grid.add(table, 0, 9);
+        lastNameCol.setCellValueFactory(
+                new PropertyValueFactory<LibMember, String>("lastName"));
+        
+        table.getColumns().addAll(idCol, firstNameCol, lastNameCol);
+        
+        HBox hbTable = new HBox(10);
+        hbTable.getChildren().add(table);
+        grid.add(hbTable, 1, 9);
 		
 		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 
