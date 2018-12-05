@@ -58,6 +58,10 @@ public class BookRepo {
 		
 	} 
 	
+	public void updateBookInfo(BookInfo book) {
+		dataAccessBookInfo.update(book.getID(), book);
+	}
+	
 	public void addBookInfo(BookInfo book) {
 		dataAccessBookInfo.add(book.getID(), book);
 	}

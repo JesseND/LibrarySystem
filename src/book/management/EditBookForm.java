@@ -38,12 +38,14 @@ public class EditBookForm extends Stage {
 	TextField txtTitle=new TextField();
 	TextField txtCurrentNumberOfCopy=new TextField();
 	TextField txtNumberOfNewCopy=new TextField();
+	TextField txtNumberOfDayAllowedToBorrowed=new TextField();
 	
 	Label lblISBNSearch=new Label("Enter ISBN:");
 	Label lblISBN=new Label("ISBN");
 	Label lblTitle=new Label("Title");
 	Label lblCurrentNumberOfCopy=new Label("Current Number of Copy");
 	Label lblNumberOfNewCopy=new Label("Additional Copy");
+	Label lblNumberOfDayAllowedToBorrowed=new Label("Max days allow to borrow");
 	
 	BookInfo book;
 	List<Author> authors=new ArrayList<>();
@@ -112,7 +114,8 @@ public class EditBookForm extends Stage {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(validate()) {
-					BookCopyController.getInstance().addBookCopy(currentbook,Integer.parseInt(txtNumberOfNewCopy.getText()));
+					BookCopyController.getInstance().updateBookInfo(currentbook);
+					BookCopyController.getInstance().addBookCopy(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
 					clear();
 				}else {
 					lblMessage.setText("*Please fill all");
@@ -147,17 +150,20 @@ public class EditBookForm extends Stage {
 		grid.add(lblISBN, 0, 5);
 		grid.add(txtISBN, 1, 5);		
 		
-		grid.add(lblCurrentNumberOfCopy, 0, 6);
-		grid.add(txtCurrentNumberOfCopy, 1, 6);		 
-
-		grid.add(lblNumberOfNewCopy, 0, 7);
-		grid.add(txtNumberOfNewCopy, 1, 7);
+		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 6);
+		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 6);	
 		
-		grid.add(btnUpdate, 1, 8);
-		grid.add(lblMessage, 1, 9);
+		grid.add(lblCurrentNumberOfCopy, 0, 7);
+		grid.add(txtCurrentNumberOfCopy, 1, 7);		 
+
+		grid.add(lblNumberOfNewCopy, 0, 8);
+		grid.add(txtNumberOfNewCopy, 1, 8);
+		
+		grid.add(btnUpdate, 1, 9);
+		grid.add(lblMessage, 1, 10);
 
 		
-		Scene scene = new Scene(grid, 600, 400);
+		Scene scene = new Scene(grid, 600, 500);
 		primaryStage.setScene(scene);
 
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
@@ -180,7 +186,7 @@ public class EditBookForm extends Stage {
 	
 	private boolean validate() {
 		 
-		if(txtTitle.getText().equals("") || txtISBN.getText().equals("") || txtNumberOfNewCopy.getText().equals("") || currentbook==null)
+		if(txtTitle.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || currentbook==null)
 			return false;
 		
 		return true;
@@ -190,7 +196,10 @@ public class EditBookForm extends Stage {
 	public void displayBookInfo() {
 		txtTitle.setText(currentbook.getTitle());
 		txtISBN.setText(currentbook.getISBN());
+		txtNumberOfDayAllowedToBorrowed.setText(String.valueOf(currentbook.getBorrowDays()));
 		txtCurrentNumberOfCopy.setText(String.valueOf(currentbook.getNumberOfCopy()));
+		
+		 
 	}
 
 }

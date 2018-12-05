@@ -14,6 +14,10 @@ public class BookCopyController {
 		return BookRepo.getInstance().getBookInfo(ISBN);
 	}
 	
+	public void updateBookInfo(BookInfo book) {
+		BookRepo.getInstance().updateBookInfo(book);
+	}
+	
 	public void addBookCopy(BookInfo book,int numberOfCopy) {
 		book.addBookCopy(numberOfCopy);
 	}

@@ -113,7 +113,7 @@ public class AddBookInfoForm extends Stage {
 				// TODO Auto-generated method stub
 								
 				if(validate()) {
-					BookInfoController.getInstance().addNewBookInfo(getBookInfo(),Integer.parseInt(txtNumberOfNewCopy.getText()));
+					BookInfoController.getInstance().addNewBookInfo(getBookInfo(),Integer.valueOf(txtNumberOfNewCopy.getText()));
 					clear();
 				}else {
 					lblMessage.setText("*Please fill all");
@@ -139,18 +139,20 @@ public class AddBookInfoForm extends Stage {
 		grid.add(lblISBN, 0, 1);
 		grid.add(txtISBN, 1, 1);
 		
-		grid.add(lblAuthor, 0, 2);
-		grid.add(txtAuthor, 1, 2);
-		grid.add(btnaddAuthors, 3, 2);
+		
+		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 2);
+		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 2);
+		
+		grid.add(lblAuthor, 0, 3);
+		grid.add(txtAuthor, 1, 3);
+		grid.add(btnaddAuthors, 3, 3);
 		 
-		grid.add(tblAuthor, 1, 3);
+		grid.add(tblAuthor, 1, 4);
 		 
 
-		grid.add(lblNumberOfNewCopy, 0, 4);
-		grid.add(txtNumberOfNewCopy, 1, 4);
-		
-		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 5);
-		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 5);
+		grid.add(lblNumberOfNewCopy, 0, 5);
+		grid.add(txtNumberOfNewCopy, 1, 5);
+	
 		
 		grid.add(btnsubmit, 1, 6);
 		
@@ -179,7 +181,7 @@ public class AddBookInfoForm extends Stage {
 	
 	private boolean validate() {
 		
-		if(txtTitle.getText().equals("") || txtISBN.getText().equals("") || txtNumberOfNewCopy.getText().equals("") || authors.size()==0)
+		if(txtTitle.getText().isEmpty()|| txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || txtNumberOfDayAllowedToBorrowed.getText().isEmpty() || authors.size()==0)
 			return false;
 		
 		return true;
@@ -216,7 +218,7 @@ public class AddBookInfoForm extends Stage {
 	}
 	
 	private BookInfo getBookInfo() {
-		BookInfo book= new BookInfo(txtTitle.getText(),txtISBN.getText(),Integer.parseInt(txtNumberOfDayAllowedToBorrowed.getText()));
+		BookInfo book= new BookInfo(txtTitle.getText(),txtISBN.getText(),Integer.valueOf(txtNumberOfDayAllowedToBorrowed.getText()));
 		
 		book.addAuthor(this.authors);
 		
