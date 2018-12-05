@@ -50,11 +50,13 @@ public class AddBookInfoForm extends Stage {
 	TextField txtTitle=new TextField();
 	TextField txtAuthor=new TextField();
 	TextField txtNumberOfNewCopy=new TextField();
+	TextField txtNumberOfDayAllowedToBorrowed=new TextField();
 	
 	Label lblISBN=new Label("ISBN");
 	Label lblTitle=new Label("Title");
 	Label lblNumberOfNewCopy=new Label("Number of Copy");
 	Label lblAuthor=new Label("Author");
+	Label lblNumberOfDayAllowedToBorrowed=new Label("Max days allow to borrow");
 	
 	BookInfo book;
 	List<Author> authors=new ArrayList<>();
@@ -147,9 +149,12 @@ public class AddBookInfoForm extends Stage {
 		grid.add(lblNumberOfNewCopy, 0, 4);
 		grid.add(txtNumberOfNewCopy, 1, 4);
 		
-		grid.add(btnsubmit, 1, 5);
+		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 5);
+		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 5);
 		
-		grid.add(lblMessage, 1, 6);
+		grid.add(btnsubmit, 1, 6);
+		
+		grid.add(lblMessage, 1, 7);
 		
 		Scene scene = new Scene(grid, 600, 400);
 		//ps.setScene(scene);
