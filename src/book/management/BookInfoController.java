@@ -16,5 +16,21 @@ public class BookInfoController {
 		
 		BookRepo.getInstance().addBookInfo(book);
 	}
+	
+		
+	public BookInfo getBookInfo(String ISBN) {
+		
+		return BookRepo.getInstance().getBookInfo(ISBN);
+	}
+	
+	public void updateBookInfo(BookInfo book) {
+		
+		BookRepo.getInstance().updateBookInfo(book);
+	}	 
+	
+	public BookInfo getBookInfo(int bookid) {
+		return BookRepo.getInstance().getBookInfo(bookid);
+	}
+
 
 }
