@@ -1,5 +1,5 @@
 package checkout;
-import common.BookRepo;
+import book.management.BookInfoController;
 import common.CheckOutRecord;
 import common.LibMember;
 import member.management.MemberController;
@@ -17,7 +17,7 @@ public class CheckOutController {
 	private static String receivedInput(String userId, String bTitle, String bISBN){
 		
 		libMemberId = userId;
-		bookInfo = BookRepo.getInstance().getBookInfo(bTitle,bISBN);
+		bookInfo = BookInfoController.getInstance().getBookInfo(bTitle,bISBN);
 		
 		if(crd.checkOutBook(userId, bookInfo)){
 			message = "You've successfully borrowed "+ message +" Book";

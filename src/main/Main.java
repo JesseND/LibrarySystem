@@ -2,6 +2,7 @@ package main;
 	
 import book.management.AddBookInfoForm;
 import book.management.EditBookForm;
+import checkout.CheckOutUI;
 import common.DefaultData;
 
 import javafx.application.Application;
@@ -53,7 +54,7 @@ public class Main extends Application {
 		AddBook = new AddBookInfoForm(SystemMenu);
 		/// WE HAVE TO CHANGE WIHT THE OFFICIAL OPTIONS
 		AddBookCopy = new EditBookForm(SystemMenu);
-		CheckOutBook = new EditBookForm(SystemMenu);
+		CheckOutBook = new CheckOutUI(SystemMenu);
 		SearchBook = new EditBookForm(SystemMenu);
 		AddMember = new MemberForm(SystemMenu);
 	

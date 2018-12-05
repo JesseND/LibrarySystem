@@ -26,16 +26,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class CheckOutUI extends Application {
+public class CheckOutUI extends Stage {
 	
-	    Stage window;
+	    Stage primaryStage;
 	
-	    public static void main(String[] args) {
-		     launch(args);
-		  }
-	    
-	    @Override
-		public void start(Stage primaryStage){
+	    public CheckOutUI(Stage ps) {
 
 	    	//get member names;
 	    	List<String> names = CheckOutController.getLibMemberNames();
@@ -43,10 +38,7 @@ public class CheckOutUI extends Application {
 	    	
 	    	//get bookInfo Title
 	    	List<String> titles = CheckOutController.getBookInfoTitles();
-	    	
-			window = primaryStage;
-			window.setTitle("Book Checkout");
-			
+	    	primaryStage = ps;
 			
 		    GridPane grid = new GridPane(); 
 		    grid.setAlignment(Pos.CENTER);
@@ -86,10 +78,13 @@ public class CheckOutUI extends Application {
 			 Button checkOutButton = new Button("Add CheckOut");
 			 grid.add(checkOutButton, 6, 8);
 		
-			Scene scene = new Scene(grid, 600, 500);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+//			Scene scene = new Scene(grid, 600, 500);
+//			primaryStage.setScene(scene);
+//			primaryStage.show();
 			
+			Scene scene = new Scene(grid);
+			primaryStage.setScene(scene);
+			setScene(scene);
 	    }
 
 }
