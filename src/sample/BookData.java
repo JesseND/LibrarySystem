@@ -1,22 +1,25 @@
-package common;
+package sample;
 
  
 import java.util.ArrayList;
  
 import java.util.List;
+
+import book.management.BookInfoController;
+import common.Author;
+import common.BookInfo;
+import member.management.MemberController;
  
 
 public class BookData {
 	private static  BookData instance = new  BookData();
-	
-	private DataAccess<Integer, BookInfo> dataAccessBookInfo = new DataAccessImpl<Integer, BookInfo>();
-	 
+		 
 	private  BookData() {}
 	
 	public static  BookData getInstance() {return instance;}
 		
-	public void load() {
-		
+	public static void load() {
+		BookInfoController controller = BookInfoController.getInstance();
 	 
 		List<Author> authors=new ArrayList<>();
 		
@@ -56,17 +59,24 @@ public class BookData {
 		System.out.println("book.getISBN() "+book4.getID());
 		System.out.println("book.getISBN() "+book5.getID());
 		
-		dataAccessBookInfo.add(book1.getID(), book1);
+		/*dataAccessBookInfo.add(book1.getID(), book1);
 		dataAccessBookInfo.add(book2.getID(), book2);
 		dataAccessBookInfo.add(book3.getID(), book3);
 		dataAccessBookInfo.add(book4.getID(), book4);
-		dataAccessBookInfo.add(book5.getID(), book5);
+		dataAccessBookInfo.add(book5.getID(), book5);*/
+		
+		controller.addNewBookInfo(book1, 0);
+		controller.addNewBookInfo(book2, 0);
+		controller.addNewBookInfo(book3, 0);
+		controller.addNewBookInfo(book4, 0);
+		controller.addNewBookInfo(book5, 0);
+		
 		getBookInfosSize();
 	
 	} 
 	
-	public void getBookInfosSize() {
-		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
+	public static void getBookInfosSize() {
+		List<BookInfo> bookinfos=BookInfoController.getInstance().getBookInfo();
 		System.out.println("book.size() "+bookinfos.size());
 	}
 	

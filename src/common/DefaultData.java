@@ -1,5 +1,7 @@
 package common;
 
+import sample.BookData;
+
 public class DefaultData {
 
 private static  DefaultData instance = new  DefaultData();

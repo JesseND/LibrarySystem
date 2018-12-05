@@ -41,8 +41,8 @@ public class OptionsController {
 
 	protected void baAddBookCopy(ActionEvent event) {
 		try {
-			Main.AddBook.setTitle("Add New Book Copy");
-			Main.AddBook.show();
+			Main.AddBookCopy.setTitle("Add New Book Copy");
+			Main.AddBookCopy.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
