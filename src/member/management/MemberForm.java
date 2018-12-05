@@ -46,8 +46,6 @@ public class MemberForm extends Stage {
 	private Button createBtn = new Button("Create");;	
 	
 	public MemberForm(Stage ps) {
-		loadDefaultData();
-		
 		primaryStage = ps;
 		primaryStage.setTitle("Member Form");
 	
@@ -140,10 +138,7 @@ public class MemberForm extends Stage {
 				MemberController controller = MemberController.getInstance();
 				controller.updateMember(member);
 				
-				data.clear();
-				for (LibMember libMember : controller.getAllMembers()) {
-					data.add(libMember);
-				}
+				setTableData(controller.getAllMembers());
 				
 				clearForm();
 				showDialog("Member has been updated.");
@@ -184,6 +179,8 @@ public class MemberForm extends Stage {
 		    return row ;
 		});
 		
+		loadMemberList();
+		
 		Scene scene = new Scene(grid);
 		primaryStage.setScene(scene);
 		setScene(scene);		
@@ -223,10 +220,14 @@ public class MemberForm extends Stage {
 		String query = queryTextField.getText();
 		MemberController controller = MemberController.getInstance();
 		List<LibMember> members = controller.search(query);
-		
+		setTableData(members);
+	}
+	
+	private void setTableData(List<LibMember> members) {
 		data.clear();
-		for (LibMember libMember : members) {
-			data.add(libMember);
+		
+		for (LibMember member : members) {
+			data.add(member);
 		}
 	}
 	
@@ -256,25 +257,9 @@ public class MemberForm extends Stage {
         zipTextField.clear();
 	}
 	
-	private void loadDefaultData() {
+	private void loadMemberList() {
 		MemberController controller = MemberController.getInstance();
-		LibMember member1 = new LibMember("001", "Edwin", "Bernal", "18677451787", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
-		LibMember member2 = new LibMember("002", "Phyo Lin", "Tun", "6587522787", new Address("2000 N Ct St #20-D", "Fairfield", "Iowa", "52556"));
-		LibMember member3 = new LibMember("003", "Jesse", "Ndamutsa", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
-		LibMember member4 = new LibMember("004", "Bealfan", "Haile", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
-		LibMember member5 = new LibMember("005", "Vorleak", "Chy", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
-		
-		controller.addNewMember(member1);
-		controller.addNewMember(member2);
-		controller.addNewMember(member3);
-		controller.addNewMember(member4);
-		controller.addNewMember(member5);
-
-		data.add(member1);
-		data.add(member2);
-		data.add(member3);
-		data.add(member4);
-		data.add(member5);
+		setTableData(controller.getAllMembers());
 	}
 	
 	private void showDialog(String msg) {
