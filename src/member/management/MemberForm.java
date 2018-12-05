@@ -20,6 +20,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.util.List;
+
 import common.*;
 
 public class MemberForm extends Stage {
@@ -37,6 +40,8 @@ public class MemberForm extends Stage {
 	private TextField cityTextField = new TextField();
 	private TextField stateTextField = new TextField();
 	private TextField zipTextField = new TextField();
+	
+	private TextField queryTextField = new TextField();
 	
 	private Button createBtn = new Button("Create");;	
 	
@@ -94,6 +99,12 @@ public class MemberForm extends Stage {
 		hbBtn.getChildren().add(clearBtn);
 		grid.add(hbBtn, 1, 8);
 		
+		HBox hboxSearch = new HBox(10);
+		Button searchBtn = new Button("Search");
+		hboxSearch.getChildren().add(queryTextField);
+		hboxSearch.getChildren().add(searchBtn);
+		grid.add(hboxSearch, 1, 9);
+		
 		TableColumn<LibMember, String> memberIdCol = new TableColumn<>("Member ID");
 		memberIdCol.setCellValueFactory(new PropertyValueFactory<LibMember, String>("id"));
 		
@@ -110,7 +121,7 @@ public class MemberForm extends Stage {
         
         HBox hbTable = new HBox(10);
         hbTable.getChildren().add(table);
-        grid.add(hbTable, 1, 9);
+        grid.add(hbTable, 1, 10);
 		
 		createBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -145,7 +156,16 @@ public class MemberForm extends Stage {
 			public void handle(ActionEvent event) {
 				clearForm();
 			}
-		});		
+		});
+		
+		searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {		
+				searchMembers();
+			}
+		});
+
 		
 		table.setRowFactory(tv -> {
 		    TableRow<LibMember> row = new TableRow<>();
@@ -197,6 +217,17 @@ public class MemberForm extends Stage {
 		
 		clearForm();
 		showDialog("Member has been created.");
+	}
+	
+	private void searchMembers() {
+		String query = queryTextField.getText();
+		MemberController controller = MemberController.getInstance();
+		List<LibMember> members = controller.search(query);
+		
+		data.clear();
+		for (LibMember libMember : members) {
+			data.add(libMember);
+		}
 	}
 	
 	private void displayMemberInfo(LibMember member) {
