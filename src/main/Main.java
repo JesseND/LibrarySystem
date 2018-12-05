@@ -1,5 +1,6 @@
 package main;
 	
+import book.management.EditBookForm;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -13,11 +14,14 @@ public class Main extends Application {
 	//Stage primaryStage;
 	
 	public static Stage loginStage;
+	public static Stage AddBook;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			loginStage= primaryStage;
+			createstages();
 			//BorderPane root = new BorderPane();
 			Parent root = FXMLLoader.load(getClass().getResource("fxml_Login.fxml"));
 			Scene scene = new Scene(root,400,400);
@@ -29,6 +33,11 @@ public class Main extends Application {
 		}
 	}
 	
+	private void createstages() {
+		// TODO Auto-generated method stub
+		AddBook = new EditBookForm(loginStage);
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
