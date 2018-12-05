@@ -46,9 +46,9 @@ public class AddBookInfoForm extends Stage {
 	
 	Label lblMessage=new Label();
 	
-	Button btnaddAuthors=new Button("Add author");
+	Button btnaddAuthor=new Button("Add author");
 	Button btnsubmit=new Button("Submit");
-	Button btnremoveAuthors=new Button("Remove author");
+	Button btnremoveAuthor=new Button("Remove author");
 		
 	TextField txtISBN=new TextField();
 	TextField txtTitle=new TextField();
@@ -107,16 +107,24 @@ public class AddBookInfoForm extends Stage {
 		//loadAuthors();
 		tblAuthor.setItems(data);	
 		System.out.print("data "+data.size());
-		btnaddAuthors.setOnAction(new EventHandler<ActionEvent>() {
+		btnaddAuthor.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(validateAuthor()) {
 					addAuthor();
-					txtAuthorFirstName.setText("");
-					txtAuthorLastName.setText("");
+					clearAuthor();
 				}
+			}
+		});
+		
+		btnremoveAuthor.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				removeAuthor(tblAuthor.getSelectionModel().getSelectedItem());
 			}
 		});
 		
@@ -138,12 +146,22 @@ public class AddBookInfoForm extends Stage {
 		
 		txtNumberOfNewCopy.textProperty().addListener(new ChangeListener<String>() {
 		   
-
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String arg1, String newValue) {
 				// TODO Auto-generated method stub
 				  if (!newValue.matches("\\d*")) {
 			            txtNumberOfNewCopy.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			}
+		});
+		
+		txtNumberOfDayAllowedToBorrowed.textProperty().addListener(new ChangeListener<String>() {
+			   
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String arg1, String newValue) {
+				// TODO Auto-generated method stub
+				  if (!newValue.matches("\\d*")) {
+					  txtNumberOfDayAllowedToBorrowed.setText(newValue.replaceAll("[^\\d]", ""));
 			        }
 			}
 		});
@@ -164,10 +182,10 @@ public class AddBookInfoForm extends Stage {
 		grid.add(lblAuthorL, 0, 4);
 		grid.add(txtAuthorLastName, 1, 4);
 		
-		grid.add(btnaddAuthors, 3, 4);
+		grid.add(btnaddAuthor, 3, 4);
 		 
 		grid.add(tblAuthor, 1, 5);
-		 
+		grid.add(btnremoveAuthor, 3, 5);
 
 		grid.add(lblNumberOfNewCopy, 0, 6);
 		grid.add(txtNumberOfNewCopy, 1, 6);
@@ -204,6 +222,11 @@ public class AddBookInfoForm extends Stage {
 		lblMessage.setText("");
 		
 		data.clear();
+	}
+	
+	private void clearAuthor() {
+		txtAuthorFirstName.setText("");
+		txtAuthorLastName.setText("");
 	}
 	 
 	private boolean validateAuthor() {
@@ -264,9 +287,14 @@ public class AddBookInfoForm extends Stage {
 	
 	private void addAuthor() {
 		Author aut=new Author(txtAuthorFirstName.getText(),txtAuthorLastName.getText());
-		data.clear();
+	 
 		data.add(aut);
 		authors.add(aut);
+	}
+	
+	private void removeAuthor(Author aut) {
+		data.remove(aut);
+		authors.remove(aut);
 	}
 
 }
