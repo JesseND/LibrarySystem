@@ -36,7 +36,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root,310,391);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			DefaultData.getInstance().loadData();
+			DefaultData.getInstance().load();
 			
 			SystemMenu.setScene(scene);
 			SystemMenu.setTitle("MPP TEAM 2");

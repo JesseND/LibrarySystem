@@ -8,7 +8,7 @@ private static  DefaultData instance = new  DefaultData();
 	
 	public static  DefaultData getInstance() {return instance;}
 	
-	public void loadData() {
+	public void load() {
 		
 		BookData.getInstance().load();
 	 
