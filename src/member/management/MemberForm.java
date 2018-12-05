@@ -1,6 +1,5 @@
 package member.management;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,8 +22,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import common.*;
 
-public class MemberForm extends Application {
+public class MemberForm extends Stage {
 
+	Stage primaryStage;
+	
 	private TableView<LibMember> table = new TableView<>();
 	
 	private ObservableList<LibMember> data = FXCollections.observableArrayList();
@@ -37,16 +38,12 @@ public class MemberForm extends Application {
 	private TextField stateTextField = new TextField();
 	private TextField zipTextField = new TextField();
 	
-	private Button createBtn = new Button("Create");;
+	private Button createBtn = new Button("Create");;	
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public MemberForm(Stage ps) {
 		loadDefaultData();
 		
+		primaryStage = ps;
 		primaryStage.setTitle("Member Form");
 	
 		GridPane grid = new GridPane();
@@ -169,7 +166,7 @@ public class MemberForm extends Application {
 		
 		Scene scene = new Scene(grid);
 		primaryStage.setScene(scene);
-		primaryStage.show();		
+		setScene(scene);		
 	}
 	
 	private LibMember getMemberInfo() {
@@ -232,12 +229,21 @@ public class MemberForm extends Application {
 		MemberController controller = MemberController.getInstance();
 		LibMember member1 = new LibMember("001", "Edwin", "Bernal", "18677451787", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
 		LibMember member2 = new LibMember("002", "Phyo Lin", "Tun", "6587522787", new Address("2000 N Ct St #20-D", "Fairfield", "Iowa", "52556"));
+		LibMember member3 = new LibMember("003", "Jesse", "Ndamutsa", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
+		LibMember member4 = new LibMember("004", "Bealfan", "Haile", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
+		LibMember member5 = new LibMember("005", "Vorleak", "Chy", "1234567890", new Address("1000 North Fourth Street", "Fairfield", "Iowa", "52557"));
 		
 		controller.addNewMember(member1);
 		controller.addNewMember(member2);
+		controller.addNewMember(member3);
+		controller.addNewMember(member4);
+		controller.addNewMember(member5);
 
 		data.add(member1);
 		data.add(member2);
+		data.add(member3);
+		data.add(member4);
+		data.add(member5);
 	}
 	
 	private void showDialog(String msg) {

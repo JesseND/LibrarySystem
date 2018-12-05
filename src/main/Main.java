@@ -6,6 +6,7 @@ import common.DefaultData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import member.management.MemberForm;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -17,6 +18,7 @@ public class Main extends Application {
 	
 	public static Stage loginStage;
 	public static Stage AddBook;
+	public static Stage memberForm;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -41,6 +43,7 @@ public class Main extends Application {
 	private void createstages() {
 		// TODO Auto-generated method stub
 		AddBook = new EditBookForm(loginStage);
+		memberForm = new MemberForm(loginStage);
 	}
 
 	public static void main(String[] args) {

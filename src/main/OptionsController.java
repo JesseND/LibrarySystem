@@ -20,5 +20,13 @@ public class OptionsController {
 		}
 	}
 	
-	
+	@FXML
+	protected void openMemberForm(ActionEvent event) {
+		try {
+			Main.memberForm.setTitle("Add/Edit Member");
+			Main.memberForm.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
