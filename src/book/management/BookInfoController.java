@@ -65,7 +65,7 @@ public class BookInfoController {
 	public BookInfo getBookInfo(String ISBN) {
 		 
 		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
-		
+		System.out.println("book.size() "+bookinfos.size());
 		for(BookInfo book : bookinfos) {
 			
 			System.out.println("book.getISBN() "+book.getISBN());
@@ -80,10 +80,10 @@ public class BookInfoController {
 	public BookInfo getBookInfo(String ISBN,String Title) {
 		 		 
 		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
-		
+	
 		for(BookInfo book : bookinfos) {			
 	 
-			
+			System.out.println("book.getISBN() "+book.getISBN());
 			if(book.getISBN().equals(ISBN) && book.getTitle().equals(Title))
 				return book;
 		}

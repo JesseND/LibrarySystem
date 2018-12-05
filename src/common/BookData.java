@@ -50,14 +50,25 @@ public class BookData {
 		book4.addBookCopy(4);
 		book5.addBookCopy(7);		 
 		
-		dataAccessBookInfo.add(book1.getID(), book1);
-		dataAccessBookInfo.add(book2.getID(), book1);
-		dataAccessBookInfo.add(book3.getID(), book1);
-		dataAccessBookInfo.add(book4.getID(), book1);
-		dataAccessBookInfo.add(book5.getID(), book1);
-		 
+		System.out.println("book.getISBN() "+book1.getID());
+		System.out.println("book.getISBN() "+book2.getID());
+		System.out.println("book.getISBN() "+book3.getID());
+		System.out.println("book.getISBN() "+book4.getID());
+		System.out.println("book.getISBN() "+book5.getID());
 		
+		dataAccessBookInfo.add(book1.getID(), book1);
+		dataAccessBookInfo.add(book2.getID(), book2);
+		dataAccessBookInfo.add(book3.getID(), book3);
+		dataAccessBookInfo.add(book4.getID(), book4);
+		dataAccessBookInfo.add(book5.getID(), book5);
+		getBookInfosSize();
+	
 	} 
+	
+	public void getBookInfosSize() {
+		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
+		System.out.println("book.size() "+bookinfos.size());
+	}
 	
 	/*public void updateBookInfo(BookInfo book) {
 		dataAccessBookInfo.update(book.getID(), book);

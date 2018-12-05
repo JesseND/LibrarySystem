@@ -11,10 +11,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -115,6 +118,7 @@ public class AddBookInfoForm extends Stage {
 				if(validate()) {
 					BookInfoController.getInstance().addNewBookInfo(getBookInfo(),Integer.valueOf(txtNumberOfNewCopy.getText()));
 					clear();
+					showSaveAlert();
 				}else {
 					lblMessage.setText("*Please fill all");
 				}
@@ -167,6 +171,13 @@ public class AddBookInfoForm extends Stage {
 		setScene(scene);
 		
 	}
+		
+		
+	private void showSaveAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION, "Successfully Save! ", ButtonType.CLOSE);
+		alert.showAndWait();
+	}
+	
 	
 	private void clear() {
 		

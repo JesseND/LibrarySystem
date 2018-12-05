@@ -4,7 +4,7 @@ import common.*;
 
 public class BookCopyController {
 	
-	/*private static BookCopyController instance = new BookCopyController();
+	private static BookCopyController instance = new BookCopyController();
 	 
 	private BookCopyController() {}
 	
@@ -13,7 +13,7 @@ public class BookCopyController {
 	public void addBookCopy(BookInfo book,int numberOfCopy) {
 		book.addBookCopy(numberOfCopy);
 		
-	}*/
+	}
 	
 	
 }

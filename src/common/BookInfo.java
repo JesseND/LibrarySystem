@@ -3,18 +3,21 @@ package common;
 import java.util.*;
 
 public class BookInfo {
-	
-	private static int bookID;
+	 
 	private String title;
 	private String ISBN;
 	private List<Author> authors=new ArrayList<Author>();
 	private List<BookCopy> bookCopys=new ArrayList<BookCopy>();
     private int borrowDays; 
+    
+    private static int counter = 1;
+
+    private final int bookID;
 
 	public BookInfo(String title,String ISBN,int borrowDays) {
 		this.title=title;
 		this.ISBN=ISBN;	
-		this.bookID++;
+		this.bookID=counter++;;
 		
 		this.setBorrowDays(borrowDays);
 	}

@@ -14,7 +14,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -114,9 +117,11 @@ public class EditBookForm extends Stage {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(validate()) {
-					BookInfoController.getInstance().addNewBookInfo(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
+					BookInfoController.getInstance().updateBookInfo(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
 			 
 					clear();
+					
+					showSaveAlert();
 				}else {
 					lblMessage.setText("*Please fill all");
 				}
@@ -165,11 +170,16 @@ public class EditBookForm extends Stage {
 		
 		Scene scene = new Scene(grid, 600, 500);
 		primaryStage.setScene(scene);
-
+ 
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		//primaryStage.show();
 		
 		setScene(scene);
+	}
+	
+	private void showSaveAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION, "Successfully update! ", ButtonType.CLOSE);
+		alert.showAndWait();
 	}
 	
 	private void clear() {
