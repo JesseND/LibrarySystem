@@ -9,7 +9,8 @@ public class BookInfo {
 	private String ISBN;
 	private List<Author> authors=new ArrayList<Author>();
 	private List<BookCopy> bookCopys=new ArrayList<BookCopy>();
-	
+    private int borrowDays; 
+
 	public BookInfo(String title,String ISBN) {
 		this.title=title;
 		this.ISBN=ISBN;	
@@ -60,5 +61,21 @@ public class BookInfo {
 	
 	public int getID() {
 		return this.bookID;
+	}
+	
+	public List<BookCopy> getBookCopys() {
+		return bookCopys;
+	}
+
+	public void setBookCopys(List<BookCopy> bookCopys) {
+		this.bookCopys = bookCopys;
+	}
+
+	public int getBorrowDays() {
+		return borrowDays;
+	}
+
+	public void setBorrowDays(int borrowDays) {
+		this.borrowDays = borrowDays;
 	}
 }
