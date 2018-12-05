@@ -1,5 +1,6 @@
 package main;
 	
+import common.DefaultData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -22,6 +23,9 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("fxml_Login.fxml"));
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
+			DefaultData.getInstance().loadData();
+			
 			loginStage.setScene(scene);
 			loginStage.show();
 		} catch(Exception e) {
