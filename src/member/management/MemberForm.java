@@ -259,6 +259,7 @@ public class MemberForm extends Stage {
 	
 	private void loadMemberList() {
 		MemberController controller = MemberController.getInstance();
+		controller.loadSample();
 		setTableData(controller.getAllMembers());
 	}
 	

@@ -7,8 +7,8 @@ import common.DefaultData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import member.management.MemberController;
 import member.management.MemberForm;
-import sample.SampleData;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -37,8 +37,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root,310,391);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-			DefaultData.getInstance().loadData();
-			SampleData.load();
+			DefaultData.getInstance().load();
 			
 			SystemMenu.setScene(scene);
 			SystemMenu.setTitle("MPP TEAM 2");
