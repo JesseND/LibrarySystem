@@ -20,11 +20,11 @@ public class BookRepo {
 	 
 		List<Author> authors=new ArrayList<>();
 		
-		BookInfo book1= new BookInfo("UML vol1", "1-22-333-4444");
-		BookInfo book2= new BookInfo("UML vol2", "1-55-666-7777");
-		BookInfo book3= new BookInfo("UML vol3", "1-23-333-4444");
-		BookInfo book4= new BookInfo("UML vol4", "1-10-100-1000");
-		BookInfo book5= new BookInfo("UML vol5", "1-12-122-1222");
+		BookInfo book1= new BookInfo("UML vol1", "1-22-333-4444",21);
+		BookInfo book2= new BookInfo("UML vol2", "1-55-666-7777",21);
+		BookInfo book3= new BookInfo("UML vol3", "1-23-333-4444",21);
+		BookInfo book4= new BookInfo("UML vol4", "1-10-100-1000",21);
+		BookInfo book5= new BookInfo("UML vol5", "1-12-122-1222",21);
 		
 		Author auth1=new Author("Jim");
 		Author auth2=new Author("Tom");

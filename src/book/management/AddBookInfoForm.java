@@ -216,7 +216,7 @@ public class AddBookInfoForm extends Stage {
 	}
 	
 	private BookInfo getBookInfo() {
-		BookInfo book= new BookInfo(txtTitle.getText(),txtISBN.getText());
+		BookInfo book= new BookInfo(txtTitle.getText(),txtISBN.getText(),Integer.parseInt(txtNumberOfDayAllowedToBorrowed.getText()));
 		
 		book.addAuthor(this.authors);
 		
