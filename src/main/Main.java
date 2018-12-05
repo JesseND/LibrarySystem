@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
-	Stage primaryStage;
+	//Stage primaryStage;
 	
 	public static Stage loginStage;
 	
