@@ -1,5 +1,6 @@
 package main;
 	
+import book.management.AddBookInfoForm;
 import book.management.EditBookForm;
 import common.DefaultData;
 
@@ -17,26 +18,31 @@ public class Main extends Application {
 	
 	//Stage primaryStage;
 	
+	public static Stage SystemMenu;
 	public static Stage loginStage;
 	public static Stage AddBook;
-	public static Stage memberForm;
+	public static Stage AddBookCopy;
+	public static Stage CheckOutBook;
+	public static Stage SearchBook;
+	public static Stage AddMember;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
-			loginStage= primaryStage;
+			SystemMenu= primaryStage;
 			createstages();
 			//BorderPane root = new BorderPane();
 			Parent root = FXMLLoader.load(getClass().getResource("fxml_Login.fxml"));
-			Scene scene = new Scene(root,400,400);
+			Scene scene = new Scene(root,310,391);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			DefaultData.getInstance().loadData();
 			SampleData.load();
 			
-			loginStage.setScene(scene);
-			loginStage.show();
+			SystemMenu.setScene(scene);
+			SystemMenu.setTitle("MPP TEAM 2");
+			SystemMenu.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -44,8 +50,13 @@ public class Main extends Application {
 	
 	private void createstages() {
 		// TODO Auto-generated method stub
-		AddBook = new EditBookForm(loginStage);
-		memberForm = new MemberForm(loginStage);
+		AddBook = new AddBookInfoForm(SystemMenu);
+		/// WE HAVE TO CHANGE WIHT THE OFFICIAL OPTIONS
+		AddBookCopy = new EditBookForm(SystemMenu);
+		CheckOutBook = new EditBookForm(SystemMenu);
+		SearchBook = new EditBookForm(SystemMenu);
+		AddMember = new MemberForm(SystemMenu);
+	
 	}
 
 	public static void main(String[] args) {

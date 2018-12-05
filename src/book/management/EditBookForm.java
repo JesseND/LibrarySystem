@@ -70,7 +70,7 @@ public class EditBookForm extends Stage {
 		// TODO Auto-generated method stub
 		primaryStage=ps;
 		setTitle("Edit Book/Add New Book Copy");
-		BookRepo.getInstance().loadData();
+		 
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
