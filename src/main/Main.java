@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import member.management.MemberController;
 import member.management.MemberForm;
+import sample.SampleData;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -59,6 +60,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		SampleData.load();
 		launch(args);
 	}
 }
