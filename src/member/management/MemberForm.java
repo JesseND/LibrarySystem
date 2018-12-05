@@ -119,14 +119,7 @@ public class MemberForm extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {		
-				LibMember member = getMemberInfo();
-				
-				MemberController controller = MemberController.getInstance();
-				controller.addNewMember(member);
-				data.add(member);				
-				
-				clearForm();
-				showDialog("Member has been created.");
+				createMember();
 			}
 		});
 		
@@ -198,6 +191,17 @@ public class MemberForm extends Application {
 		return libMember;
 	}
 
+	private void createMember() {
+		LibMember member = getMemberInfo();
+		
+		MemberController controller = MemberController.getInstance();
+		controller.addNewMember(member);
+		data.add(member);				
+		
+		clearForm();
+		showDialog("Member has been created.");
+	}
+	
 	private void displayMemberInfo(LibMember member) {
 		createBtn.setDisable(true);
 		memberIdTextField.setDisable(true);
