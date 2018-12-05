@@ -3,5 +3,5 @@ package main;
 public class User {
 	private String username;
 	private String password;
-	private Accesslevel accesslevel;
+	//private Accesslevel accesslevel;
 }

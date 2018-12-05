@@ -6,5 +6,9 @@ public class Author extends Person {
 		super(firstName, lastName, phone, address);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Author(String firstName) {
+		super(firstName, "", "", new Address("","", "", ""));
+	}
 
 }
