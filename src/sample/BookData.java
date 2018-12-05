@@ -29,6 +29,12 @@ public class BookData {
 		BookInfo book4= new BookInfo("UML vol4", "1-10-100-1000",21);
 		BookInfo book5= new BookInfo("UML vol5", "1-12-122-1222",21);
 		
+		BookInfo book6= new BookInfo("Software Engineering", "1-22-333-6122",21);
+		BookInfo book7= new BookInfo("Big Data", "1-55-666-9872",21);
+		BookInfo book8= new BookInfo("Algorithm", "3-23-333-7635",21);
+		BookInfo book9= new BookInfo("The POWER of TM", "1-10-100-9812",21);
+		BookInfo book10= new BookInfo("DMBS", "2-12-122-2124",21);
+		
 		Author auth1=new Author("Jim");
 		Author auth2=new Author("Tom");
 		Author auth3=new Author("Linda");
@@ -46,12 +52,23 @@ public class BookData {
 		book3.addAuthor(authors);
 		book4.addAuthor(authors);
 		book5.addAuthor(authors);
+		
+		book6.addAuthor(authors);
+		book7.addAuthor(authors);
+		book8.addAuthor(authors);
+		book9.addAuthor(authors);
+		book10.addAuthor(authors);
 		 
 		book1.addBookCopy(12);
 		book2.addBookCopy(2);
 		book3.addBookCopy(3);
 		book4.addBookCopy(4);
-		book5.addBookCopy(7);		 
+		book5.addBookCopy(7);
+		book6.addBookCopy(2);
+		book7.addBookCopy(6);
+		book8.addBookCopy(1);
+		book9.addBookCopy(8);
+		book10.addBookCopy(9);
 		
 		System.out.println("book.getISBN() "+book1.getID());
 		System.out.println("book.getISBN() "+book2.getID());
@@ -70,6 +87,13 @@ public class BookData {
 		controller.addNewBookInfo(book3, 0);
 		controller.addNewBookInfo(book4, 0);
 		controller.addNewBookInfo(book5, 0);
+		
+		
+		controller.addNewBookInfo(book6, 0);
+		controller.addNewBookInfo(book7, 0);
+		controller.addNewBookInfo(book8, 0);
+		controller.addNewBookInfo(book9, 0);
+		controller.addNewBookInfo(book10, 0);
 		
 		getBookInfosSize();
 	

@@ -173,7 +173,7 @@ public class EditBookForm extends Stage {
  
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		//primaryStage.show();
-		
+		clear();
 		setScene(scene);
 	}
 	

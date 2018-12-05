@@ -167,7 +167,7 @@ public class AddBookInfoForm extends Stage {
 
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		//ps.show();
-		
+		clear();
 		setScene(scene);
 		
 	}
