@@ -21,10 +21,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import common.*;
 
 public class MemberForm extends Application {
 
 	private TableView<LibMember> table = new TableView<>();
+	
 	private ObservableList<LibMember> data = FXCollections.observableArrayList();
 	private TextField memberIdTextField = new TextField();
 	private TextField firstNameTextField = new TextField();
@@ -34,6 +36,8 @@ public class MemberForm extends Application {
 	private TextField cityTextField = new TextField();
 	private TextField stateTextField = new TextField();
 	private TextField zipTextField = new TextField();
+	
+	private Button createBtn = new Button("Create");;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -84,7 +88,6 @@ public class MemberForm extends Application {
 		grid.add(zipLabel, 0, 7);
 		grid.add(zipTextField, 1, 7);
 		
-		Button createBtn = new Button("Create");
 		Button updateBtn = new Button("Update");
 		Button clearBtn = new Button("Clear");
 		HBox hbBtn = new HBox(10);
@@ -191,6 +194,7 @@ public class MemberForm extends Application {
 	}
 
 	private void displayMemberInfo(LibMember member) {
+		createBtn.setDisable(true);
 		memberIdTextField.setDisable(true);
         memberIdTextField.setText(member.getId());
         firstNameTextField.setText(member.getFirstName());
@@ -203,6 +207,7 @@ public class MemberForm extends Application {
 	}
 	
 	private void clearForm() {
+		createBtn.setDisable(false);
 		memberIdTextField.setDisable(false);
 		memberIdTextField.clear();
         firstNameTextField.clear();
