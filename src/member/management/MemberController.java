@@ -11,11 +11,16 @@ public class MemberController {
 	
 	public static MemberController getInstance() { return instance; }
 	
-	public LibMember addNewMember(LibMember libMember) {
-		return dataAccess.add(libMember.getId(), libMember);
+	public LibMember addNewMember(LibMember member) {
+		return dataAccess.add(member.getId(), member);
 	}
 	
 	public LibMember getMemberById(String id) {
 		return dataAccess.get(id);
 	}
+	
+	public LibMember updateMember(LibMember member) {
+		return dataAccess.update(member.getId(), member);
+	}
 }
+
