@@ -1,5 +1,7 @@
 package member.management;
 
+import java.util.List;
+
 import common.*;
 
 public class MemberController {
@@ -21,6 +23,10 @@ public class MemberController {
 	
 	public LibMember updateMember(LibMember member) {
 		return dataAccess.update(member.getId(), member);
+	}
+	
+	public List<LibMember> getAllMembers() {
+		return dataAccess.getAll();
 	}
 }
 

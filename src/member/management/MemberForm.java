@@ -139,6 +139,11 @@ public class MemberForm extends Application {
 				MemberController controller = MemberController.getInstance();
 				controller.updateMember(member);
 				
+				data.clear();
+				for (LibMember libMember : controller.getAllMembers()) {
+					data.add(libMember);
+				}
+				
 				clearForm();
 				showDialog("Member has been updated.");
 			}
