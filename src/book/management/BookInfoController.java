@@ -1,10 +1,15 @@
 package book.management;
  
+import java.util.ArrayList;
+import java.util.List;
+
 import common.*;
 
 public class BookInfoController {
 	
 	private static  BookInfoController instance = new  BookInfoController();
+	
+	private DataAccess<Integer, BookInfo> dataAccessBookInfo = new DataAccessImpl<Integer, BookInfo>();
 	 
 	private  BookInfoController() {}
 	
@@ -14,9 +19,19 @@ public class BookInfoController {
 						
 		book.addBookCopy(NumberOfCopy);
 		
-		BookRepo.getInstance().addBookInfo(book);
+		dataAccessBookInfo.add(book.getID(), book);
+	}	
+	
+	/*public BookInfo getBookInfo(String ISBN,String Title) {
+
+		//System.out.println("ISBN "+ISBN);
+		
+		return BookRepo.getInstance().getBookInfo(ISBN,Title);
 	}
 	
+	public List<BookInfo> getBookInfo(String ISBN,String Title,String Author){
+		return new ArrayList<BookInfo>();
+	}
 		
 	public BookInfo getBookInfo(String ISBN) {
 		
@@ -31,6 +46,54 @@ public class BookInfoController {
 	public BookInfo getBookInfo(int bookid) {
 		return BookRepo.getInstance().getBookInfo(bookid);
 	}
-
-
+	*/
+	public void updateBookInfo(BookInfo book, int NumberOfCopy) {
+		
+		book.addBookCopy(NumberOfCopy);
+		
+		dataAccessBookInfo.update(book.getID(), book);
+	}	 
+	
+	public List<BookInfo> getBookInfo(){
+		return dataAccessBookInfo.getAll();
+	}
+	
+	public BookInfo getBookInfo(int bookid) {
+		return dataAccessBookInfo.get(bookid);
+	}
+	
+	public BookInfo getBookInfo(String ISBN) {
+		 
+		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
+		
+		for(BookInfo book : bookinfos) {
+			
+			System.out.println("book.getISBN() "+book.getISBN());
+			
+			if(book.getISBN().equals(ISBN))
+				return book;
+		}
+		
+		return null;
+	}
+	 
+	public BookInfo getBookInfo(String ISBN,String Title) {
+		 		 
+		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
+		
+		for(BookInfo book : bookinfos) {			
+	 
+			
+			if(book.getISBN().equals(ISBN) && book.getTitle().equals(Title))
+				return book;
+		}
+		
+		return null;
+	}
+	
+	public List<BookInfo> getBookInfo(String ISBN,String Title,String Author){
+		return new ArrayList<BookInfo>();
+	}
+	
+	
 }

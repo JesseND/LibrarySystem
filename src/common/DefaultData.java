@@ -10,7 +10,7 @@ private static  DefaultData instance = new  DefaultData();
 	
 	public void loadData() {
 		
-		BookRepo.getInstance().loadData();
+		BookData.getInstance().load();
 	 
 	}
 }

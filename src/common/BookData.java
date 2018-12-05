@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
  
 
-public class BookRepo {
-	private static  BookRepo instance = new  BookRepo();
+public class BookData {
+	private static  BookData instance = new  BookData();
 	
 	private DataAccess<Integer, BookInfo> dataAccessBookInfo = new DataAccessImpl<Integer, BookInfo>();
 	 
-	private  BookRepo() {}
+	private  BookData() {}
 	
-	public static  BookRepo getInstance() {return instance;}
+	public static  BookData getInstance() {return instance;}
 		
-	public void loadData() {
+	public void load() {
 		
 	 
 		List<Author> authors=new ArrayList<>();
@@ -50,15 +50,16 @@ public class BookRepo {
 		book4.addBookCopy(4);
 		book5.addBookCopy(7);		 
 		
-		addBookInfo(book1);
-		addBookInfo(book2);
-		addBookInfo(book3);
-		addBookInfo(book4);
-		addBookInfo(book5);		 
+		dataAccessBookInfo.add(book1.getID(), book1);
+		dataAccessBookInfo.add(book2.getID(), book1);
+		dataAccessBookInfo.add(book3.getID(), book1);
+		dataAccessBookInfo.add(book4.getID(), book1);
+		dataAccessBookInfo.add(book5.getID(), book1);
+		 
 		
 	} 
 	
-	public void updateBookInfo(BookInfo book) {
+	/*public void updateBookInfo(BookInfo book) {
 		dataAccessBookInfo.update(book.getID(), book);
 	}
 	
@@ -105,4 +106,5 @@ public class BookRepo {
 	public List<BookInfo> getBookInfo(String ISBN,String Title,String Author){
 		return new ArrayList<BookInfo>();
 	}
+	*/
 }
