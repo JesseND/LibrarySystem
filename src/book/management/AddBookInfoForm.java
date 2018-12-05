@@ -48,17 +48,20 @@ public class AddBookInfoForm extends Stage {
 	
 	Button btnaddAuthors=new Button("Add author");
 	Button btnsubmit=new Button("Submit");
+	Button btnremoveAuthors=new Button("Remove author");
 		
 	TextField txtISBN=new TextField();
 	TextField txtTitle=new TextField();
-	TextField txtAuthor=new TextField();
+	TextField txtAuthorFirstName=new TextField();
+	TextField txtAuthorLastName=new TextField();
 	TextField txtNumberOfNewCopy=new TextField();
 	TextField txtNumberOfDayAllowedToBorrowed=new TextField();
 	
 	Label lblISBN=new Label("ISBN");
 	Label lblTitle=new Label("Title");
 	Label lblNumberOfNewCopy=new Label("Number of Copy");
-	Label lblAuthor=new Label("Author");
+	Label lblAuthorF=new Label("Author First Name");
+	Label lblAuthorL=new Label("Author Last Name");
 	Label lblNumberOfDayAllowedToBorrowed=new Label("Max days allow to borrow");
 	
 	BookInfo book;
@@ -88,23 +91,31 @@ public class AddBookInfoForm extends Stage {
 		  
 		lblMessage.setTextFill(Color.RED);
 		txtNumberOfNewCopy.setText("1");
+		txtNumberOfDayAllowedToBorrowed.setText("21");
 		tblAuthor.setEditable(false);
-		TableColumn<Author, String> dateCol = new TableColumn<>("Name");
-        dateCol.setPrefWidth(300);
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+		TableColumn<Author, String> dateCol1 = new TableColumn<>("FirstName");
+		dateCol1.setPrefWidth(100);
+        dateCol1.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+        
+        TableColumn<Author, String> dateCol2 = new TableColumn<>("LastName");
+        dateCol2.setPrefWidth(100);
+        dateCol2.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+        
         ScrollBar table1VerticalScrollBar = findScrollBar( tblAuthor, Orientation.VERTICAL);
-        tblAuthor.getColumns().add(dateCol);
-		loadAuthors();
+        tblAuthor.getColumns().add(dateCol1);
+        tblAuthor.getColumns().add(dateCol2);
+		//loadAuthors();
 		tblAuthor.setItems(data);	
-		
+		System.out.print("data "+data.size());
 		btnaddAuthors.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				if(!txtAuthor.getText().equals("")) {
+				if(validateAuthor()) {
 					addAuthor();
-					txtAuthor.setText("");
+					txtAuthorFirstName.setText("");
+					txtAuthorLastName.setText("");
 				}
 			}
 		});
@@ -147,22 +158,26 @@ public class AddBookInfoForm extends Stage {
 		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 2);
 		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 2);
 		
-		grid.add(lblAuthor, 0, 3);
-		grid.add(txtAuthor, 1, 3);
-		grid.add(btnaddAuthors, 3, 3);
+		grid.add(lblAuthorF, 0, 3);
+		grid.add(txtAuthorFirstName, 1, 3);
+		
+		grid.add(lblAuthorL, 0, 4);
+		grid.add(txtAuthorLastName, 1, 4);
+		
+		grid.add(btnaddAuthors, 3, 4);
 		 
-		grid.add(tblAuthor, 1, 4);
+		grid.add(tblAuthor, 1, 5);
 		 
 
-		grid.add(lblNumberOfNewCopy, 0, 5);
-		grid.add(txtNumberOfNewCopy, 1, 5);
+		grid.add(lblNumberOfNewCopy, 0, 6);
+		grid.add(txtNumberOfNewCopy, 1, 6);
 	
 		
-		grid.add(btnsubmit, 1, 6);
+		grid.add(btnsubmit, 1, 7);
 		
-		grid.add(lblMessage, 1, 7);
+		grid.add(lblMessage, 1, 8);
 		
-		Scene scene = new Scene(grid, 600, 400);
+		Scene scene = new Scene(grid, 1000, 700);
 		//ps.setScene(scene);
 
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
@@ -184,10 +199,30 @@ public class AddBookInfoForm extends Stage {
 		txtTitle.setText("");
 		txtISBN.setText("");
 		txtNumberOfNewCopy.setText("1");
-		txtAuthor.setText("");
+		txtAuthorFirstName.setText("");
+		txtAuthorLastName.setText("");
 		lblMessage.setText("");
 		
 		data.clear();
+	}
+	 
+	private boolean validateAuthor() {
+		if(txtAuthorFirstName.getText().trim().isEmpty() || txtAuthorLastName.getText().trim().isEmpty())
+			return false;
+		
+		if(isAuthorAlreadyExists(txtAuthorFirstName.getText().trim(),txtAuthorLastName.getText()))
+			return false;
+		
+		return true;
+	}
+	
+	private boolean isAuthorAlreadyExists(String firstName,String lastName) {
+		for(Author aut : authors) {
+			if(aut.getFirstName().equals(firstName) && aut.getLastName().equals(lastName))
+				return true;
+		}
+		
+		return false;
 	}
 	
 	private boolean validate() {
@@ -217,19 +252,10 @@ public class AddBookInfoForm extends Stage {
 	        return null;
 
 	    }
-	private void loadAuthors() {
-		
-		 data.add(new Author("Jim"));
-		 data.add(new Author("Andy"));
-		 data.add(new Author("Windy"));
-		 data.add(new Author("Jack"));
-		 data.add(new Author("Susan"));
-		 data.add(new Author("Linda"));
-		 data.add(new Author("Joyce"));
-	}
+	
 	
 	private BookInfo getBookInfo() {
-		BookInfo book= new BookInfo(txtTitle.getText(),txtISBN.getText(),Integer.valueOf(txtNumberOfDayAllowedToBorrowed.getText()));
+		BookInfo book= new BookInfo(txtTitle.getText().trim(),txtISBN.getText().trim(),Integer.valueOf(txtNumberOfDayAllowedToBorrowed.getText().trim()));
 		
 		book.addAuthor(this.authors);
 		
@@ -237,7 +263,8 @@ public class AddBookInfoForm extends Stage {
 	}
 	
 	private void addAuthor() {
-		Author aut=new Author(txtAuthor.getText());
+		Author aut=new Author(txtAuthorFirstName.getText(),txtAuthorLastName.getText());
+		data.clear();
 		data.add(aut);
 		authors.add(aut);
 	}

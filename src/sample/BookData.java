@@ -35,11 +35,11 @@ public class BookData {
 		BookInfo book9= new BookInfo("The POWER of TM", "1-10-100-9812",21);
 		BookInfo book10= new BookInfo("DMBS", "2-12-122-2124",21);
 		
-		Author auth1=new Author("Jim");
-		Author auth2=new Author("Tom");
-		Author auth3=new Author("Linda");
-		Author auth4=new Author("Stacy");
-		Author auth5=new Author("Susan");
+		Author auth1=new Author("Jim","Robinson");
+		Author auth2=new Author("Tom","Robinson");
+		Author auth3=new Author("Linda","Robinson");
+		Author auth4=new Author("Stacy","Robinson");
+		Author auth5=new Author("Susan","Robinson");
 		
 		authors.add(auth1);
 		authors.add(auth2);
