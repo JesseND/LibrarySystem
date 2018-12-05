@@ -7,6 +7,7 @@ import common.DefaultData;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import member.management.MemberForm;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -52,7 +53,8 @@ public class Main extends Application {
 		AddBookCopy = new EditBookForm(SystemMenu);
 		CheckOutBook = new EditBookForm(SystemMenu);
 		SearchBook = new EditBookForm(SystemMenu);
-		AddMember = new EditBookForm(SystemMenu);
+		AddMember = new MemberForm(SystemMenu);
+	
 	}
 
 	public static void main(String[] args) {

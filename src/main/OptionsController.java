@@ -38,6 +38,7 @@ public class OptionsController {
 	}
 	
 	@FXML
+
 	protected void baAddBookCopy(ActionEvent event) {
 		try {
 			Main.AddBook.setTitle("Add New Book Copy");
@@ -46,6 +47,7 @@ public class OptionsController {
 			e.printStackTrace();
 		}
 	}
+
 	@FXML
 	protected void baCheckOutBook(ActionEvent event) {
 		try {
@@ -67,11 +69,10 @@ public class OptionsController {
 	@FXML
 	protected void baAddMember(ActionEvent event) {
 		try {
-			Main.AddBook.setTitle("Edit Member/Add Member");
-			Main.AddBook.show();
+			Main.AddMember.setTitle("Edit Member/Add Member");
+			Main.AddMember.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}	
-	
 }
