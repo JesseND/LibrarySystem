@@ -91,7 +91,7 @@ public class EditBookForm extends Stage {
 					
 					currentbook=null;
 					
-					currentbook=BookCopyController.getInstance().getBookInfo(txtISBNSearch.getText());
+					currentbook=BookInfoController.getInstance().getBookInfo(txtISBNSearch.getText());
 					
 					if(currentbook==null) {
 						lblMessageSearch.setText("Book not found.");
@@ -114,8 +114,8 @@ public class EditBookForm extends Stage {
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(validate()) {
-					BookCopyController.getInstance().updateBookInfo(currentbook);
-					BookCopyController.getInstance().addBookCopy(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
+					BookInfoController.getInstance().addNewBookInfo(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
+			 
 					clear();
 				}else {
 					lblMessage.setText("*Please fill all");

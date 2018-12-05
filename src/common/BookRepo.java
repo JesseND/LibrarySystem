@@ -66,6 +66,10 @@ public class BookRepo {
 		dataAccessBookInfo.add(book.getID(), book);
 	}
 	
+	public BookInfo getBookInfo(int bookid) {
+		return dataAccessBookInfo.get(bookid);
+	}
+	
 	public BookInfo getBookInfo(String ISBN) {
 		//System.out.println("ISBN "+ISBN);
 		
