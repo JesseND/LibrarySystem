@@ -23,7 +23,13 @@ public class OptionsController {
 		btnAddBookCopy.setVisible(false);
 		btnAddMember.setVisible(false);
 		btnSearchBook.setVisible(false);
-		btnCheckOutBook.setVisible(false);		
+		btnCheckOutBook.setVisible(false);
+		btnAddBook.setLayoutY(90);
+		btnAddBookCopy.setLayoutY(130);
+		btnAddMember.setLayoutY(170);
+		btnSearchBook.setLayoutY(210);
+		btnCheckOutBook.setLayoutY(250);
+		
 		if(Main.alAccessLevel==AccessLevel.ADMIN || Main.alAccessLevel==AccessLevel.BOTH  )
 		{
 			btnAddBook.setVisible(true);
@@ -34,6 +40,17 @@ public class OptionsController {
 		{
 			btnSearchBook.setVisible(true);
 			btnCheckOutBook.setVisible(true);			
+		}
+		
+		if ( Main.alAccessLevel!=AccessLevel.BOTH && Main.alAccessLevel==AccessLevel.ADMIN ) {
+			btnAddBook.setLayoutY(90);
+			btnAddBookCopy.setLayoutY(130);
+			btnAddMember.setLayoutY(170);
+		}
+		
+		if ( Main.alAccessLevel!=AccessLevel.BOTH && Main.alAccessLevel==AccessLevel.LIBRARIAN ) {
+			btnSearchBook.setLayoutY(90);
+			btnCheckOutBook.setLayoutY(130);
 		}
 			
 	}
