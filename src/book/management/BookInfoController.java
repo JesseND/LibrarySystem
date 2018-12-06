@@ -91,8 +91,19 @@ public class BookInfoController {
 		return null;
 	}
 	
-	public List<BookInfo> getBookInfo(String ISBN,String Title,String Author){
-		return new ArrayList<BookInfo>();
+	public List<BookInfo> getBookInfoByTitle(String Title){
+		//System.out.println("book.size() "+bookinfos.size());
+		List<BookInfo> bookinfos=dataAccessBookInfo.getAll();
+		List<BookInfo> results=new ArrayList<>();
+		for(BookInfo book : bookinfos) {
+			
+			System.out.println("book.getISBN() "+book.getISBN());
+			
+			if(book.getTitle().equals(Title))
+				results.add(book);
+		}
+		
+		return results;
 	}
 	
 	
