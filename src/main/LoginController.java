@@ -42,6 +42,7 @@ public class LoginController {
 				System.out.println("paso"+userReview.getPassword());
 				System.out.println("paso"+tfPassword.getText());
 				if (userReview.login(tfPassword.getText())) {
+					Main.alAccessLevel=userReview.getAccesslevel();
 					Parent root = FXMLLoader.load(getClass().getResource("fxml_Options.fxml"));
 					Scene scene = new Scene(root,310,391);
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

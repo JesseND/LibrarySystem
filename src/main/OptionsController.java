@@ -5,10 +5,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class OptionsController {
-
+	
+	@FXML Button btnAddBook;
+	@FXML Button btnAddBookCopy;
+	@FXML Button btnCheckOutBook;
+	@FXML Button btnSearchBook;
+	@FXML Button btnAddMember;
+	
+	
+	public OptionsController(){
+		System.out.println("asdf");
+		
+	}
 	
 	@FXML
 	protected void baAddBook(ActionEvent event) {
@@ -36,9 +48,7 @@ public class OptionsController {
 			e.printStackTrace();
 		}
 	}
-	
 	@FXML
-
 	protected void baAddBookCopy(ActionEvent event) {
 		try {
 			Main.AddBookCopy.setTitle("Add New Book Copy");
@@ -47,7 +57,6 @@ public class OptionsController {
 			e.printStackTrace();
 		}
 	}
-
 	@FXML
 	protected void baCheckOutBook(ActionEvent event) {
 		try {

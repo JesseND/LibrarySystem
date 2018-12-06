@@ -27,6 +27,7 @@ public class Main extends Application {
 	public static Stage CheckOutBook;
 	public static Stage SearchBook;
 	public static Stage AddMember;
+	public static AccessLevel alAccessLevel;
 	
 	@Override
 	public void start(Stage primaryStage) {
