@@ -20,7 +20,7 @@ public class UserController {
 		return dataAccess.add(User.getUsername(), User);
 	}
 	
-	public User getUserById(String id) {
+	public User getUserByUsername(String id) {
 		return dataAccess.get(id);
 	}
 	
