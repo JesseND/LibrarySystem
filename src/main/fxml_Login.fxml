@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -14,19 +15,20 @@
             <Button layoutX="224.0" layoutY="186.0" mnemonicParsing="false" onAction="#baLogin" text="Login" />
             <Label layoutX="18.0" layoutY="96.0" text="User  :" />
             <Label layoutX="18.0" layoutY="145.0" text="Password" />
-            <TextField layoutX="108.0" layoutY="91.0" prefHeight="31.0" prefWidth="173.0" />
-            <TextField layoutX="108.0" layoutY="140.0" prefHeight="31.0" prefWidth="173.0" />
+            <TextField fx:id="tfuser" layoutX="108.0" layoutY="91.0" prefHeight="31.0" prefWidth="173.0" promptText="Jesse, Jimmy, Jesse, Vorlea, Edwin, Bealfan" text="Edwin" />
             <ImageView fitHeight="202.0" fitWidth="189.0" layoutX="14.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo2.png" />
                </image>
             </ImageView>
+            <PasswordField fx:id="tfPassword" layoutX="110.0" layoutY="140.0" prefHeight="31.0" prefWidth="173.0" promptText="Pista 12345678." text="12345678." />
+            <Label layoutX="36.0" layoutY="-8.0" prefHeight="63.0" prefWidth="239.0" text="Library System">
+               <font>
+                  <Font name="Comic Sans MS Italic" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbError" layoutX="21.0" layoutY="55.0" text="User or Password is wrong" textFill="#fa0505" visible="false" />
          </children>
       </Pane>
-      <Label layoutX="24.0" layoutY="24.0" prefHeight="63.0" prefWidth="239.0" text="Library System">
-         <font>
-            <Font name="Comic Sans MS Italic" size="30.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

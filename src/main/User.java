@@ -16,7 +16,7 @@ public class User {
 
 	public boolean login(String strPassword)
 	{
-		if(strPassword == this.password)
+		if(strPassword.equals(this.password))
 			return true;
 		else
 			return false;		

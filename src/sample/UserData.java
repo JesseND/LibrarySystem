@@ -8,7 +8,7 @@ import member.management.MemberController;
 public class UserData {
 	public static void load() {
 		UserController controller = UserController.getInstance();
-		User user1 = new User("Jymmy","12345678.",AccessLevel.ADMIN);
+		User user1 = new User("Jimmy","12345678.",AccessLevel.ADMIN);
 		User user2 = new User("Bealfan","12345678.",AccessLevel.ADMIN);
 		User user3 = new User("Edwin","12345678.",AccessLevel.ADMIN);
 		User user4 = new User("Jesse","12345678.",AccessLevel.ADMIN);
