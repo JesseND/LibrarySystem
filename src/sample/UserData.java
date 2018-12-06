@@ -10,9 +10,9 @@ public class UserData {
 		UserController controller = UserController.getInstance();
 		User user1 = new User("Jimmy","12345678.",AccessLevel.ADMIN);
 		User user2 = new User("Bealfan","12345678.",AccessLevel.ADMIN);
-		User user3 = new User("Edwin","12345678.",AccessLevel.ADMIN);
-		User user4 = new User("Jesse","12345678.",AccessLevel.ADMIN);
-		User user5 = new User("Vorlea","12345678.",AccessLevel.ADMIN);
+		User user3 = new User("Edwin","12345678.",AccessLevel.BOTH);
+		User user4 = new User("Jesse","12345678.",AccessLevel.LIBRARIAN);
+		User user5 = new User("Vorlea","12345678.",AccessLevel.LIBRARIAN);
 		controller.addNewUser(user1);
 		controller.addNewUser(user2);
 		controller.addNewUser(user3);

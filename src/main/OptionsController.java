@@ -10,16 +10,32 @@ import javafx.stage.Stage;
 
 public class OptionsController {
 	
-	@FXML Button btnAddBook;
-	@FXML Button btnAddBookCopy;
-	@FXML Button btnCheckOutBook;
-	@FXML Button btnSearchBook;
-	@FXML Button btnAddMember;
+	@FXML public Button btnAddBook;
+	@FXML public Button btnAddBookCopy;
+	@FXML public Button btnCheckOutBook;
+	@FXML public Button btnSearchBook;
+	@FXML public Button btnAddMember;
 	
-	
-	public OptionsController(){
+	@FXML
+	public void initialize() {
 		System.out.println("asdf");
-		
+		btnAddBook.setVisible(false);
+		btnAddBookCopy.setVisible(false);
+		btnAddMember.setVisible(false);
+		btnSearchBook.setVisible(false);
+		btnCheckOutBook.setVisible(false);		
+		if(Main.alAccessLevel==AccessLevel.ADMIN || Main.alAccessLevel==AccessLevel.BOTH  )
+		{
+			btnAddBook.setVisible(true);
+			btnAddBookCopy.setVisible(true);
+			btnAddMember.setVisible(true);
+		}
+		if(Main.alAccessLevel==AccessLevel.LIBRARIAN|| Main.alAccessLevel==AccessLevel.BOTH )
+		{
+			btnSearchBook.setVisible(true);
+			btnCheckOutBook.setVisible(true);			
+		}
+			
 	}
 	
 	@FXML
@@ -38,12 +54,13 @@ public class OptionsController {
 	protected void baloginStage(ActionEvent event) {
 		try {
 			Main.loginStage.close();
-			Main.SystemMenu.close();
+			//Main.SystemMenu.close();
 			Main.AddBook.close();
 			Main.AddBookCopy.close();
 			Main.CheckOutBook.close();
 			Main.SearchBook.close();
 			Main.AddMember.close();
+			Main.SystemMenu.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
