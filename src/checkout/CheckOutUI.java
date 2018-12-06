@@ -7,6 +7,7 @@ import common.BookInfo;
 import common.LibMember;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import member.management.MemberController;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class CheckOutUI extends Stage {
 	
@@ -84,7 +86,7 @@ public class CheckOutUI extends Stage {
 				 
 				 System.out.println(libMemberId +" "+bookId);
 				 String msg = CheckOutController.getInstance().validateInputs(libMemberId, bookId);
-				 System.out.println(msg);
+				 displayAlert(msg);
 			 });
 		
              
@@ -93,6 +95,38 @@ public class CheckOutUI extends Stage {
 			primaryStage.setScene(scene);
 			setScene(scene);
 	    }
+	    
+	    
+
+		private static void displayAlert(String msg) {
+			Stage newWindow = new Stage();
+			
+			//Make sure when newWindow is created we first deal with it 
+			//before going back to the calling window
+			//Block all the user interaction with the calling window
+			newWindow.initModality(Modality.APPLICATION_MODAL);
+			newWindow.setTitle("Checkout result");
+			newWindow.setMinWidth(300);
+			
+			
+			Label label = new Label();
+			label.setText(msg);
+			Button closeButton = new Button("Close Alert");
+			closeButton.setOnAction(e -> newWindow.close());
+			
+			VBox layout = new VBox(20);
+			layout.getChildren().addAll(label, closeButton);
+			layout.setAlignment(Pos.CENTER);
+			
+			Scene scene = new Scene(layout);
+			newWindow.setScene(scene);
+			
+			newWindow.showAndWait();
+			
+			
+		}
+	    
+
 }
 
 

@@ -31,7 +31,7 @@ public class CheckOutController {
 		bookInfo = BookInfoController.getInstance().getBookInfo(bookId);
 		
 		if(checkOutBook(userId, bookInfo)){
-			message = MemberController.getInstance().getMemberById(userId).toString()+" has borrowed "+ bookInfo.getTitle() + ", Copy No "+bookCopy.getBookCopyID();
+			message = MemberController.getInstance().getMemberById(userId).toString()+" borrow "+ bookInfo.getTitle() + ", Copy No "+bookCopy.getBookCopyID();
 			return message;
 		}else {
 			message = "No copy of this book available to borrow!!";
