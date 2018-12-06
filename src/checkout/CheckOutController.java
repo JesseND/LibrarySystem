@@ -29,6 +29,8 @@ public class CheckOutController {
 		return message;
 	}
 	
+	
+	
 	public static List<String> getLibMemberNames(){
 		
 		List<LibMember> members = MemberController.getInstance().getAllMembers();
@@ -45,9 +47,19 @@ public class CheckOutController {
 		return memberFirstAndSecondNames;
 	}
 	
+	
+	
 	public static List<String> getBookInfoTitles(){
+		List<BookInfo> books = BookInfoController.getInstance().getBookInfo();
+		
+		List<String> titles = new ArrayList<String>();
+		for(BookInfo book: books) {
+			String title = book.getTitle();
+			
+			titles.add(title);
+		}
 		
 		
-		return null;
+		return titles;
 	}
 }

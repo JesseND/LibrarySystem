@@ -18,7 +18,6 @@ public class LibMember extends Person {
 	
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", firstName=" + getFirstName() + ", lastName=" + getLastName() + ", address=" + getAddress()
-				+ ", phoneNumber=" + getPhoneNumber() + "]";
+		return this.getFirstName()+" "+this.getLastName();
 	}
 }

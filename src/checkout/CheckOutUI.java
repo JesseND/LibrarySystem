@@ -1,30 +1,22 @@
 package checkout;
 
-import member.management.MemberController;
-
 import java.util.List;
 
 import book.management.BookInfoController;
-import member.management.MemberController;
 import common.BookInfo;
 import common.LibMember;
-import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import member.management.MemberController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class CheckOutUI extends Stage {
 	
@@ -33,12 +25,12 @@ public class CheckOutUI extends Stage {
 	    public CheckOutUI(Stage ps) {
 
 	    	//get member names;
-	    	List<String> names = CheckOutController.getLibMemberNames();
+           //List<String> names = CheckOutController.getLibMemberNames();
 	    	
 	    	
-	    	//get bookInfo Title
-	    	List<String> titles = CheckOutController.getBookInfoTitles();
-	    	primaryStage = ps;
+//	    	//get bookInfo Title
+//	    	List<String> titles = CheckOutController.getBookInfoTitles();
+//	    	primaryStage = ps;
 			
 		    GridPane grid = new GridPane(); 
 		    grid.setAlignment(Pos.CENTER);
@@ -52,11 +44,10 @@ public class CheckOutUI extends Stage {
 		    grid.add(memberLabel, 0, 0);
 		    
 		    //Lib member dropdown List
-		    ComboBox<String> myComboBox = new ComboBox<String>();
-		    for(int i=0; i<names.size();i++ ){
-		    	String name = names.get(i);
-		    	myComboBox.getItems().add(name);
-		    }
+		    ObservableList<LibMember> members = FXCollections.observableArrayList();
+		    members.addAll(MemberController.getInstance().getAllMembers());
+		    ComboBox<LibMember> myComboBox = new ComboBox<>();
+		    myComboBox.setItems(members);
 			myComboBox.setEditable(true); 
 			grid.add(myComboBox, 4, 0);
 			
@@ -69,8 +60,10 @@ public class CheckOutUI extends Stage {
 		     grid.add(bookInfoLabel, 0, 4);
 		    
 		     //BookInfo dropdown List
-		     ComboBox<String> myComboBox2 = new ComboBox<String>();
-		     myComboBox2.getItems().addAll("A","B","C","D","E");
+		     ObservableList<BookInfo> books = FXCollections.observableArrayList();
+		     books.addAll(BookInfoController.getInstance().getBookInfo());
+		     ComboBox<BookInfo> myComboBox2 = new ComboBox<>();
+		     myComboBox2.setItems(books);
 		     myComboBox2.setEditable(true); 
 		     grid.add(myComboBox2, 4, 4);
 			

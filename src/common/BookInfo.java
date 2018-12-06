@@ -83,4 +83,10 @@ public class BookInfo {
 	public void setBorrowDays(int borrowDays) {
 		this.borrowDays = borrowDays;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getTitle();
+	}
+
 }
