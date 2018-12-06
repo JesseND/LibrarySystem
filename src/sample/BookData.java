@@ -68,7 +68,7 @@ public class BookData {
 		book7.addBookCopy(6);
 		book8.addBookCopy(1);
 		book9.addBookCopy(8);
-		book10.addBookCopy(9);
+		book10.addBookCopy(1);
 		
 		System.out.println("book.getISBN() "+book1.getID());
 		System.out.println("book.getISBN() "+book2.getID());
