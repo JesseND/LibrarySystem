@@ -2,6 +2,7 @@ package book.management;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import common.*; 
 import javafx.application.Application;
@@ -12,13 +13,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -32,16 +38,24 @@ public class EditBookForm extends Stage {
 	Label lblMessage=new Label();	
 	Label lblMessageSearch=new Label();	
 	
+	Button btnaddAuthor=new Button("Add author");
 	Button btnSearch=new Button("Search");
 	Button btnUpdate=new Button("Submit");
+	Button btnremoveAuthor=new Button("Remove author");
 	
 	TextField txtISBNSearch=new TextField();
+	
+	TextField txtAuthorFirstName=new TextField();
+	TextField txtAuthorLastName=new TextField();
 		
 	TextField txtISBN=new TextField();
 	TextField txtTitle=new TextField();
 	TextField txtCurrentNumberOfCopy=new TextField();
 	TextField txtNumberOfNewCopy=new TextField();
 	TextField txtNumberOfDayAllowedToBorrowed=new TextField();
+	
+	Label lblAuthorF=new Label("Author First Name");
+	Label lblAuthorL=new Label("Author Last Name");
 	
 	Label lblISBNSearch=new Label("Enter ISBN:");
 	Label lblISBN=new Label("ISBN");
@@ -85,6 +99,20 @@ public class EditBookForm extends Stage {
 		txtNumberOfNewCopy.setText("1");
 		tblAuthor.setEditable(false);
 		
+		TableColumn<Author, String> dateCol1 = new TableColumn<>("FirstName");
+		dateCol1.setPrefWidth(100);
+        dateCol1.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+        
+        TableColumn<Author, String> dateCol2 = new TableColumn<>("LastName");
+        dateCol2.setPrefWidth(100);
+        dateCol2.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+        
+        ScrollBar table1VerticalScrollBar = findScrollBar( tblAuthor, Orientation.VERTICAL);
+        tblAuthor.getColumns().add(dateCol1);
+        tblAuthor.getColumns().add(dateCol2);
+		//loadAuthors();
+		tblAuthor.setItems(data);	
+		
 		btnSearch.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -92,8 +120,7 @@ public class EditBookForm extends Stage {
 				// TODO Auto-generated method stub
 				if(!txtISBNSearch.getText().equals("")) {
 					
-					currentbook=null;
-					
+				 
 					currentbook=BookInfoController.getInstance().getBookInfo(txtISBNSearch.getText());
 					
 					if(currentbook==null) {
@@ -111,13 +138,36 @@ public class EditBookForm extends Stage {
 			}
 		});
 		
+		btnaddAuthor.setOnAction(new EventHandler<ActionEvent>() {
+					
+					@Override
+					public void handle(ActionEvent event) {
+						// TODO Auto-generated method stub
+						if(validateAuthor()) {
+							addAuthor();
+							clearAuthor();
+						}
+					}
+		});
+		
+
+		btnremoveAuthor.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				removeAuthor(tblAuthor.getSelectionModel().getSelectedItem());
+			}
+		});
+		
+		
 		btnUpdate.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if(validate()) {
-					BookInfoController.getInstance().updateBookInfo(currentbook,Integer.valueOf(txtNumberOfNewCopy.getText()));
+					BookInfoController.getInstance().updateBookInfo(getBookInfo(),Integer.valueOf(txtNumberOfNewCopy.getText()));
 			 
 					clear();
 					
@@ -170,17 +220,28 @@ public class EditBookForm extends Stage {
 		grid.add(lblNumberOfDayAllowedToBorrowed, 0, 6);
 		grid.add(txtNumberOfDayAllowedToBorrowed, 1, 6);	
 		
-		grid.add(lblCurrentNumberOfCopy, 0, 7);
-		grid.add(txtCurrentNumberOfCopy, 1, 7);		 
-
-		grid.add(lblNumberOfNewCopy, 0, 8);
-		grid.add(txtNumberOfNewCopy, 1, 8);
+		grid.add(lblAuthorF, 0, 7);
+		grid.add(txtAuthorFirstName, 1, 7);
 		
-		grid.add(btnUpdate, 1, 9);
-		grid.add(lblMessage, 1, 10);
+		grid.add(lblAuthorL, 0, 8);
+		grid.add(txtAuthorLastName, 1, 8);
+		
+		grid.add(btnaddAuthor, 2, 8);
+		 
+		grid.add(tblAuthor, 1, 9);
+		grid.add(btnremoveAuthor, 2, 9);
+		
+		grid.add(lblCurrentNumberOfCopy, 0, 10);
+		grid.add(txtCurrentNumberOfCopy, 1, 10);		 
+
+		grid.add(lblNumberOfNewCopy, 0, 11);
+		grid.add(txtNumberOfNewCopy, 1, 11);
+		
+		grid.add(btnUpdate, 1, 12);
+		grid.add(lblMessage, 1, 13);
 
 		
-		Scene scene = new Scene(grid, 600, 500);
+		Scene scene = new Scene(grid, 700, 600);
 		primaryStage.setScene(scene);
  
 		//scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
@@ -203,12 +264,14 @@ public class EditBookForm extends Stage {
 	 
 		lblMessage.setText("");
 		
+		currentbook=null;
 		data.clear();
+		authors.clear();
 	}
 	
 	private boolean validate() {
 		 
-		if(txtTitle.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || txtNumberOfDayAllowedToBorrowed.getText().isEmpty() || currentbook==null)
+		if(txtTitle.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || txtNumberOfDayAllowedToBorrowed.getText().isEmpty() || currentbook==null || this.authors.size()==0)
 			return false;
 		
 		return true;
@@ -220,8 +283,82 @@ public class EditBookForm extends Stage {
 		txtISBN.setText(currentbook.getISBN());
 		txtNumberOfDayAllowedToBorrowed.setText(String.valueOf(currentbook.getBorrowDays()));
 		txtCurrentNumberOfCopy.setText(String.valueOf(currentbook.getNumberOfCopy()));
-		
+		addAuthor(currentbook.getAuthorList());
 		 
 	}
+	
+	private BookInfo getBookInfo() {
+		 
+		this.currentbook.setTitle(txtTitle.getText().trim());
+		this.currentbook.setISBN(txtISBN.getText().trim());
+		this.currentbook.setBorrowDays(Integer.valueOf(txtNumberOfDayAllowedToBorrowed.getText().trim()));
+		this.currentbook.clearAuthor();
+		this.currentbook.addAuthor(this.authors);
+		
+		return currentbook;
+	}
+	
+	private void clearAuthor() {
+		txtAuthorFirstName.setText("");
+		txtAuthorLastName.setText("");
+	}
+	 
+	private boolean validateAuthor() {
+		if(txtAuthorFirstName.getText().trim().isEmpty() || txtAuthorLastName.getText().trim().isEmpty())
+			return false;
+		
+		if(isAuthorAlreadyExists(txtAuthorFirstName.getText().trim(),txtAuthorLastName.getText()))
+			return false;
+		
+		return true;
+	}
+	
+	private boolean isAuthorAlreadyExists(String firstName,String lastName) {
+		for(Author aut : authors) {
+			if(aut.getFirstName().equals(firstName) && aut.getLastName().equals(lastName))
+				return true;
+		}
+		
+		return false;
+	}
 
+
+	 private ScrollBar findScrollBar(TableView<?> table, Orientation orientation) {
+
+	        // this would be the preferred solution, but it doesn't work. it always gives back the vertical scrollbar
+	        //      return (ScrollBar) table.lookup(".scroll-bar:horizontal");
+	        //      
+	        // => we have to search all scrollbars and return the one with the proper orientation
+
+	        Set<Node> set = table.lookupAll(".scroll-bar");
+	        for( Node node: set) {
+	            ScrollBar bar = (ScrollBar) node;
+	            if( bar.getOrientation() == orientation) {
+	                return bar;
+	            }
+	        }
+
+	        return null;
+
+	    }
+	 
+		private void addAuthor() {
+			Author aut=new Author(txtAuthorFirstName.getText(),txtAuthorLastName.getText());
+		 
+			data.add(aut);
+			authors.add(aut);
+		}
+		
+		private void addAuthor(List<Author> authors) {
+			for(Author aut : authors) {
+				data.add(aut);
+				this.authors.add(aut);
+			}
+			 
+		}
+		
+		private void removeAuthor(Author aut) {
+			data.remove(aut);
+			authors.remove(aut);
+		}
 }

@@ -21,9 +21,13 @@ public class BookInfo {
 		
 		this.setBorrowDays(borrowDays);
 	}
+	
+	public void clearAuthor() {
+		this.authors.clear();
+	}
 	 
 	public void addAuthor(List<Author> authors) {
-		 
+	 
 		for(Author aut : authors)
 			addAuthor(aut);
 	}
@@ -56,8 +60,16 @@ public class BookInfo {
 		return this.ISBN;
 	}
 	
+	public void setISBN(String ISBN) {
+		this.ISBN=ISBN;
+	}
+	
 	public String getTitle() {
 		return this.title;
+	}
+	
+	public void setTitle(String title) {
+		this.title=title;
 	}
 	
 	public int getNumberOfCopy() {
@@ -82,6 +94,10 @@ public class BookInfo {
 
 	public void setBorrowDays(int borrowDays) {
 		this.borrowDays = borrowDays;
+	}
+	
+	public List<Author> getAuthorList() {
+		return this.authors;
 	}
 	
 	@Override

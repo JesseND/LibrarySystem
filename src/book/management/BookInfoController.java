@@ -84,7 +84,7 @@ public class BookInfoController {
 		for(BookInfo book : bookinfos) {			
 	 
 			System.out.println("book.getISBN() "+book.getISBN());
-			if(book.getISBN().equals(ISBN) && book.getTitle().equals(Title))
+			if(book.getISBN().equals(ISBN) && book.getTitle().toUpperCase().equals(Title.toUpperCase()))
 				return book;
 		}
 		
