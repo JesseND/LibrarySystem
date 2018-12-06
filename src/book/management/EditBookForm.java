@@ -120,7 +120,7 @@ public class EditBookForm extends Stage {
 				// TODO Auto-generated method stub
 				if(!txtISBNSearch.getText().equals("")) {
 					
-				 
+					clear();
 					currentbook=BookInfoController.getInstance().getBookInfo(txtISBNSearch.getText());
 					
 					if(currentbook==null) {
