@@ -38,9 +38,6 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("fxml_Login.fxml"));
 			Scene scene = new Scene(root,310,391);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
-		
-			
 			SystemMenu.setScene(scene);
 			SystemMenu.setTitle("MPP TEAM 2");
 			SystemMenu.show();

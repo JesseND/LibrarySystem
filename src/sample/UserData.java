@@ -1,5 +1,8 @@
-package main;
+package sample;
 
+import main.AccessLevel;
+import main.User;
+import main.UserController;
 import member.management.MemberController;
 
 public class UserData {
