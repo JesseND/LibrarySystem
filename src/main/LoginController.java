@@ -52,9 +52,11 @@ public class LoginController {
 					stage.setWidth(285);
 					stage.setHeight(598);
 					stage.show();
+					lbError.setVisible(false);
+					tfPassword.setText("");
+					tfuser.setText("");
 					Main.loginStage=stage;
 					Main.SystemMenu.hide();
-					lbError.setVisible(false);
 				}
 				else
 				{

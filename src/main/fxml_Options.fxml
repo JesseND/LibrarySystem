@@ -13,10 +13,10 @@
       <Pane prefHeight="568.0" prefWidth="255.0">
          <children>
             <Button fx:id="btnAddBook" layoutX="56.0" layoutY="94.0" mnemonicParsing="false" onAction="#baAddBook" prefHeight="31.0" prefWidth="143.0" text="Add book" />
-            <Button layoutX="56.0" layoutY="195.0" mnemonicParsing="false" onAction="#baCheckOutBook" prefHeight="31.0" prefWidth="143.0" text="Check out Book" />
-            <Button layoutX="56.0" layoutY="253.0" mnemonicParsing="false" onAction="#baSearchBook" prefHeight="31.0" prefWidth="143.0" text="Search Book" />
-            <Button layoutX="56.0" layoutY="299.0" mnemonicParsing="false" onAction="#baAddMember" prefHeight="31.0" prefWidth="143.0" text="Add Member" />
-            <Button layoutX="56.0" layoutY="140.0" mnemonicParsing="false" onAction="#baAddBookCopy" prefHeight="31.0" prefWidth="143.0" text="Add book Copy" />
+            <Button fx:id="btnCheckOutBook" layoutX="56.0" layoutY="195.0" mnemonicParsing="false" onAction="#baCheckOutBook" prefHeight="31.0" prefWidth="143.0" text="Check out Book" />
+            <Button fx:id="btnSearchBook" layoutX="56.0" layoutY="253.0" mnemonicParsing="false" onAction="#baSearchBook" prefHeight="31.0" prefWidth="143.0" text="Search Book" />
+            <Button fx:id="btnAddMember" layoutX="56.0" layoutY="299.0" mnemonicParsing="false" onAction="#baAddMember" prefHeight="31.0" prefWidth="143.0" text="Add Member" />
+            <Button fx:id="btnAddBookCopy" layoutX="56.0" layoutY="140.0" mnemonicParsing="false" onAction="#baAddBookCopy" prefHeight="31.0" prefWidth="143.0" text="Add book Copy" />
             <Button layoutX="56.0" layoutY="344.0" mnemonicParsing="false" onAction="#baloginStage" prefHeight="31.0" prefWidth="143.0" text="log out" />
             <Label layoutX="14.0" layoutY="14.0" prefHeight="63.0" prefWidth="239.0" text="Library System">
                <font>
