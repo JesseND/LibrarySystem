@@ -1,37 +1,106 @@
 package checkout;
 import book.management.BookInfoController;
 import common.CheckOutRecord;
+import common.DataAccess;
+import common.DataAccessImpl;
 import common.LibMember;
 import member.management.MemberController;
+import common.BookCopy;
 import common.BookInfo;
+
+import java.time.LocalDate;
 import java.util.*;
 
 public class CheckOutController {
 
 	static String libMemberId; 
 	static BookInfo bookInfo;
-	static CheckOutRecord crd = new CheckOutRecord();
+	int recordCounter;
+	static CheckOutRecord crd ; 
 	static String message; 
+	static BookCopy bookCopy;
+	
+	private static  CheckOutController instance = new  CheckOutController();
+	private  DataAccess<Integer, CheckOutRecord> dataAccessCheckOutRecord = new DataAccessImpl<Integer, CheckOutRecord>();
 	
 	
-	private static String receivedInput(String userId, String bTitle, String bISBN){
+	
+	public String validateInputs(String userId, int bookId){
 		
 		libMemberId = userId;
-		bookInfo = BookInfoController.getInstance().getBookInfo(bTitle,bISBN);
+		bookInfo = BookInfoController.getInstance().getBookInfo(bookId);
 		
-		if(crd.checkOutBook(userId, bookInfo)){
-			message = "You've successfully borrowed "+ message +" Book";
-			
+		if(checkOutBook(userId, bookInfo)){
+			message = MemberController.getInstance().getMemberById(userId).toString()+" has borrowed "+ bookInfo.getTitle() + ", Copy No "+bookCopy.getBookCopyID();
+			return message;
+		}else {
+			message = "No copy of this book available to borrow!!";
 			return message;
 		}
+	}
+	
+	public static  CheckOutController getInstance() {return instance;}
+	
+	public static BookCopy getBookCopyAvailable(BookInfo book){
 		
-		message = "No copy of this book available to borrow!!";
-		return message;
+		BookCopy bCopy;
+		List<BookCopy> bCopyList = book.getBookCopys();
+		
+		for(int i = 1; i<=bCopyList.size(); i++) {
+			
+			bCopy = bCopyList.get(i);
+			
+			if(!bCopy.isBorrowed()){
+				bookCopy = bCopy;
+				return bCopy;
+			}
+		}
+		
+		return null;
 	}
 	
 	
 	
-	public static List<String> getLibMemberNames(){
+	public boolean checkOutBook(String userId, BookInfo book){
+		
+		crd = new CheckOutRecord();
+	  if(book.getBookCopys().size() == 0){
+		  //print that the book has no copy available
+		  return false;
+		  
+	  }else{
+		  if(getBookCopyAvailable(book)!= null) {
+			  
+			  BookCopy bCopy = getBookCopyAvailable(book);
+			
+			  crd.setUserId(userId);
+			  crd.setCopyId(bCopy.getBookCopyID());
+			  crd.setBookId(book.getID());
+			  crd.setDateOut(LocalDate.now()); 
+			  crd.setExpectedReturnDate(LocalDate.now().plusDays(book.getBorrowDays()));
+			  crd.setReturned(false);
+			  
+			  addNewCheckOutRecord(crd);
+			  
+			  return true;
+			  
+		  }
+		  else
+			  return false;  
+	  }
+}
+	
+	  public List<CheckOutRecord> getCheckOutRecords(){
+			return dataAccessCheckOutRecord.getAll();
+		}
+	  
+	  public void addNewCheckOutRecord(CheckOutRecord crd) {
+			
+		  crd.setCheckOutRdId(getCheckOutRecords().size()+1);
+		  dataAccessCheckOutRecord.add(crd.getCheckOutRdId(), crd);
+		}	
+	  
+	 public static List<String> getLibMemberNames(){
 		
 		List<LibMember> members = MemberController.getInstance().getAllMembers();
 		

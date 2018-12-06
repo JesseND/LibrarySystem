@@ -21,15 +21,11 @@ import javafx.scene.layout.GridPane;
 public class CheckOutUI extends Stage {
 	
 	    Stage primaryStage;
+	    String libMemberId;
+		int bookId  ;
 	
 	    public CheckOutUI(Stage ps) {
 
-	    	//get member names;
-           //List<String> names = CheckOutController.getLibMemberNames();
-	    	
-	    	
-//	    	//get bookInfo Title
-//	    	List<String> titles = CheckOutController.getBookInfoTitles();
 
 	    	primaryStage = ps;
 			
@@ -38,8 +34,9 @@ public class CheckOutUI extends Stage {
 		    grid.setHgap(10);
 			grid.setVgap(10);
 			grid.setPadding(new Insets(20, 20, 20, 20));
-		    
-		    
+
+			
+			
 		    //Lib member label
 		    Label memberLabel = new Label("Select Lib Member: ");
 		    grid.add(memberLabel, 0, 0);
@@ -51,10 +48,15 @@ public class CheckOutUI extends Stage {
 		    myComboBox.setItems(members);
 			myComboBox.setEditable(true); 
 			grid.add(myComboBox, 4, 0);
+			myComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+	    	    if(newval != null) {
+	    	    	libMemberId = newval.getId();
+	    	    }
+	    	});
 			
-			 //CheckOut button
-			 Button memberCheckoutHistory = new Button("Checkout History");
-			 grid.add(memberCheckoutHistory, 6, 2);
+//			 //CheckOut button
+//			 Button memberCheckoutHistory = new Button("Checkout History");
+//			 grid.add(memberCheckoutHistory, 6, 2);
 			  
 			 //BookInfo label
 			 Label bookInfoLabel = new Label("Select Book Title: ");
@@ -67,20 +69,30 @@ public class CheckOutUI extends Stage {
 		     myComboBox2.setItems(books);
 		     myComboBox2.setEditable(true); 
 		     grid.add(myComboBox2, 4, 4);
+		     myComboBox2.valueProperty().addListener((obs, oldval, newval) -> {
+		    	    if(newval != null){
+		    	    	bookId = newval.getID();
+		    	    }
+		    	    	
+		    	           
+		    	});
 			
 			//CheckOut button
 			 Button checkOutButton = new Button("Add CheckOut");
 			 grid.add(checkOutButton, 6, 8);
+			 checkOutButton.setOnAction(e->{
+				 
+				 System.out.println(libMemberId +" "+bookId);
+				 String msg = CheckOutController.getInstance().validateInputs(libMemberId, bookId);
+				 System.out.println(msg);
+			 });
 		
-//			Scene scene = new Scene(grid, 600, 500);
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
+             
 			
 			Scene scene = new Scene(grid);
 			primaryStage.setScene(scene);
 			setScene(scene);
 	    }
-
 }
 
 

@@ -13,9 +13,7 @@ public class CheckOutRecord {
 	private LocalDate dateOut;
 	private LocalDate expectedReturnDate;
 	
-	
-	private static int recordCounter = 0;
-	CheckOutRecord crd ; 
+	private static int counter = 1;
 
 	public CheckOutRecord() {
 	}
@@ -25,7 +23,7 @@ public class CheckOutRecord {
 	}
 
 	public void setCheckOutRdId(int checkOutRdId) {
-		this.checkOutRdId = checkOutRdId;
+		this.checkOutRdId = counter++;
 	}
 
 	public LocalDate getDateOut() {
@@ -60,14 +58,6 @@ public class CheckOutRecord {
 		this.bookId = bookId;
 	}
 
-	public int getRecordCounter() {
-		return recordCounter;
-	}
-
-	public void setRecordCounter(int recordCounter) {
-		this.recordCounter = recordCounter;
-	}
-
 	public boolean isReturned() {
 		return isReturned;
 	}
@@ -75,24 +65,7 @@ public class CheckOutRecord {
 	public void setReturned(boolean isReturned) {
 		this.isReturned = isReturned;
 	}
-
-public BookCopy getBookCopyAvailable(BookInfo book){
-		
-		BookCopy bCopy = null;
-		List<BookCopy> bCopyList = book.getBookCopys();
-		
-		for(int i = 1; i<=bCopyList.size(); i++) {
-			
-			bCopy = bCopyList.get(i);
-			
-			if(!bCopy.isBorrowed()){
-				break;
-			}
-		}
-		
-		return bCopy;
-	}
-
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -101,33 +74,6 @@ public BookCopy getBookCopyAvailable(BookInfo book){
 		this.userId = userId;
 	}
 	
-	
-	public boolean checkOutBook(String userId, BookInfo book){
-		
-			crd = new CheckOutRecord();
-		  if(book.getBookCopys().size() == 0){
-			  //print that the book has no copy available
-			  return false;
-			  
-		  }else{
-			 
-			  BookCopy bCopy = getBookCopyAvailable(book);
-			 
-			  crd.checkOutRdId = ++recordCounter;
-			  crd.userId = userId;
-			  crd.bookCopyId = bCopy.getBookCopyID();
-			  crd.bookId = book.getID();
-			  crd.dateOut = LocalDate.now(); 
-			  crd.expectedReturnDate = LocalDate.now().plusDays(book.getBorrowDays());
-			  crd.isReturned = false;
-//			  
-//			  if(CheckOutDataAccessor.addCheckOutBookToDB(crd)){
-//				  return true;
-//			  }
-			  
-			  	return false;  
-		  }
 
-	}
-	
+
 }
