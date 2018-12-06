@@ -30,7 +30,8 @@ public class CheckOutUI extends Stage {
 	    	
 //	    	//get bookInfo Title
 //	    	List<String> titles = CheckOutController.getBookInfoTitles();
-//	    	primaryStage = ps;
+
+	    	primaryStage = ps;
 			
 		    GridPane grid = new GridPane(); 
 		    grid.setAlignment(Pos.CENTER);
