@@ -140,6 +140,18 @@ public class EditBookForm extends Stage {
 			}
 		});
 		
+		txtNumberOfDayAllowedToBorrowed.textProperty().addListener(new ChangeListener<String>() {
+			   
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String arg1, String newValue) {
+				// TODO Auto-generated method stub
+				  if (!newValue.matches("\\d*")) {
+					  txtNumberOfDayAllowedToBorrowed.setText(newValue.replaceAll("[^\\d]", ""));
+			        }
+			}
+		});
+		
+		
 		txtCurrentNumberOfCopy.setEditable(false);
 		txtNumberOfNewCopy.setText("0");
 		
@@ -196,7 +208,7 @@ public class EditBookForm extends Stage {
 	
 	private boolean validate() {
 		 
-		if(txtTitle.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || currentbook==null)
+		if(txtTitle.getText().isEmpty() || txtISBN.getText().isEmpty() || txtNumberOfNewCopy.getText().isEmpty() || txtNumberOfDayAllowedToBorrowed.getText().isEmpty() || currentbook==null)
 			return false;
 		
 		return true;
