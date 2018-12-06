@@ -53,6 +53,8 @@ public class CheckOutUI extends Stage {
 			myComboBox.valueProperty().addListener((obs, oldval, newval) -> {
 	    	    if(newval != null) {
 	    	    	libMemberId = newval.getId();
+	    	    }else {
+	    	    	libMemberId = null;
 	    	    }
 	    	});
 			
@@ -74,9 +76,9 @@ public class CheckOutUI extends Stage {
 		     myComboBox2.valueProperty().addListener((obs, oldval, newval) -> {
 		    	    if(newval != null){
 		    	    	bookId = newval.getID();
+		    	    }else {
+		    	    	bookId = 0;
 		    	    }
-		    	    	
-		    	           
 		    	});
 			
 			//CheckOut button

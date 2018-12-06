@@ -18,6 +18,19 @@ public class CheckOutRecord {
 	public CheckOutRecord() {
 	}
 
+	
+	public CheckOutRecord(int checkOutRdId, int bookId, int bookCopyId, String userId, boolean isReturned,
+			LocalDate dateOut, LocalDate expectedReturnDate) {
+		this.checkOutRdId = checkOutRdId;
+		this.bookId = bookId;
+		this.bookCopyId = bookCopyId;
+		this.userId = userId;
+		this.isReturned = isReturned;
+		this.dateOut = dateOut;
+		this.expectedReturnDate = expectedReturnDate;
+	}
+
+
 	public int getCheckOutRdId() {
 		return checkOutRdId;
 	}
