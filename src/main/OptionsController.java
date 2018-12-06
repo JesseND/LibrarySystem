@@ -51,8 +51,8 @@ public class OptionsController {
 	@FXML
 	protected void baCheckOutBook(ActionEvent event) {
 		try {
-			Main.AddBook.setTitle("CheckoutBook Copy");
-			Main.AddBook.show();
+			Main.CheckOutBook.setTitle("Book Checkout");
+			Main.CheckOutBook.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

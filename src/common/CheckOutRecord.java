@@ -8,7 +8,7 @@ public class CheckOutRecord {
 	private int checkOutRdId;
 	private int bookId;
 	private int bookCopyId;
-	private int userId; 
+	private String userId; 
 	private boolean isReturned;
 	private LocalDate dateOut;
 	private LocalDate expectedReturnDate;
@@ -93,22 +93,22 @@ public BookCopy getBookCopyAvailable(BookInfo book){
 		return bCopy;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	
 	
-	public boolean checkOutBook(int userId, BookInfo book){
-		crd = new CheckOutRecord();
-		  
-		  
+	public boolean checkOutBook(String userId, BookInfo book){
+		
+			crd = new CheckOutRecord();
 		  if(book.getBookCopys().size() == 0){
 			  //print that the book has no copy available
 			  return false;
+			  
 		  }else{
 			 
 			  BookCopy bCopy = getBookCopyAvailable(book);
